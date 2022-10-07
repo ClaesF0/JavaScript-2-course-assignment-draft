@@ -26,7 +26,7 @@
               <input
                 type=""
                 id="nameField"
-                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                class="w-full p-4 pr-12 text-sm border-2 border-gray-400 rounded-lg shadow-sm"
                 placeholder="Enter name (required)"
               />
               <span class="absolute inset-y-0 inline-flex items-center right-4">
@@ -35,7 +35,8 @@
                     id="nameFieldError"
                     class="hidden text-sm ml-4 text-red-600"
             >
-                Enter a name</span>
+                Enter a name
+              </span>
             </div>
           </div>
           <div>
@@ -44,7 +45,7 @@
               <input
                 type="email"
                 id="emailField"
-                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                class="w-full p-4 pr-12 text-sm border-2 border-gray-400 rounded-lg shadow-sm "
                 placeholder="Enter email (required)"
               />
               <span class="absolute inset-y-0 inline-flex items-center right-4">
@@ -67,6 +68,11 @@
                     id="emailFieldError"
                     class="hidden text-sm ml-4 text-red-600"
             >
+                An email address is required</span>
+              <span
+                    id="emailInvalidError"
+                    class="hidden text-sm ml-4 text-red-600"
+            >
                 Enter a valid noroff.no or stud.noroff.no mail adress</span>
             </div>
           </div>
@@ -77,7 +83,7 @@
               <input
                 type="password"
                 id="passwordField"
-                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                class="w-full p-4 pr-12 text-sm border-2 border-gray-400 rounded-lg shadow-sm"
                 placeholder="Enter password"
               />
               <span class="absolute inset-y-0 inline-flex items-center right-4">
@@ -106,13 +112,13 @@
                     id="passwordFieldError"
                     class="hidden text-sm ml-4 text-red-600"
             >
-                Password of at least 8 letters is required</span>
+                </span>
             </div>
             <div class="relative mt-1">
               <input
                 type="password"
                 id="passwordConfirmField"
-                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                class="w-full p-4 pr-12 text-sm border-2 border-gray-400 rounded-lg shadow-sm"
                 placeholder="Confirm password"
               />
               <span class="absolute inset-y-0 inline-flex items-center right-4">
@@ -141,9 +147,14 @@
                     id="passwordConfirmFieldError"
                     class="hidden text-sm ml-4 text-red-600"
             >
-                Passwords does not match</span>
+                Passwords are not matching, try again. </span>
             </div>
           </div>
+          <span
+                    id="capsLockReminder"
+                    class="hidden text-sm ml-4 text-red-600"
+            >
+                CAPS LOCK IS ON </span>
           <button
             type="submit"
             class="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
