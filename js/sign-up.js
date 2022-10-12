@@ -13,6 +13,7 @@ const emailFieldError = document.querySelector("#emailFieldError")
 const emailInvalidError = document.querySelector("#emailInvalidError")
 const passwordFieldError = document.querySelector("#passwordFieldError")
 const passwordConfirmFieldError = document.querySelector("#passwordConfirmFieldError")
+const otherErrorField = document.querySelector("#errorMessage")
 
 
 // checked
@@ -62,7 +63,6 @@ signUpForm.addEventListener('keyup', function (e) {
 }
 );
 //user can sign up
-//const SIGNUP_URL = BASE_URL_FOR_API + "api/v1/social/auth/register"
 signUpForm.addEventListener("submit", function(event){
     event.preventDefault();
 
@@ -121,7 +121,7 @@ signUpForm.addEventListener("submit", function(event){
 
 
     let isPasswordMatching = false;
-    isPasswordMatching = validatePassword(passwordField.value, passwordConfirmField.value); // true // false
+    isPasswordMatching = validPassword(passwordField.value, passwordConfirmField.value); // true // false
     if (isPasswordMatching) {
         passwordConfirmFieldError.classList.add("hidden");
         isPasswordMatching = true
@@ -138,21 +138,19 @@ signUpForm.addEventListener("submit", function(event){
     isPasswordMatching;
 
 
-
-
     if (formValidated) {
         console.log("Validation SUCCEEDED!!  🥳");
         const userData = {
-            "name": isNameField.value,
-            "email": isEmailField.value,
+            "name": nameField.value,
+            "email": emailField.value,
             "password": passwordField.value
         }
-/*
-        const REGISTER_USER_URL_ENDPOINT = USER_SIGNUP_URL;
 
-        (async function signUpUser() {
+       // const REGISTER_USER_URL_ENDPOINT = USER_SIGNUP_URL;
+
+        async function registerNewUser() {
             try {
-                const response = await fetch(REGISTER_USER_URL_ENDPOINT, {
+                const response = await fetch(SIGNUP_URL, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -163,18 +161,19 @@ signUpForm.addEventListener("submit", function(event){
                 const data = await response.json();
 
                 if (response.ok) {
-                    console.log("POST REQUEST SUCCEEDED!!  🥳 🤗🤗");
-                    location.replace("/")
+                    console.log("New user sucessfully registered");
+                    location.replace("index.html")
                 } else {
-                    generalErrorMessage.innerHTML = `Sorry !! ${data.message}`
+                    errorMessage.innerHTML = `The following error occured: ${data.message}`
                 }
             } catch (e) {
                 console.log(e);
             }
-        })();
+        } 
+        registerNewUser();
 
     } else {
-        console.log("Validation FAILED!! 💩");
+        console.log("Process failed due to the following error: ", e);
     }
 
 })

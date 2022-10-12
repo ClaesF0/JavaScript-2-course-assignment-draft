@@ -1,5 +1,5 @@
 console.log('API-RELATED.JS INIT',);
-import { collectUserName } from "./local-storage-related";
+import { collectUserName } from "../js/local-storage-related";
 const userName = collectUserName();
 
 const BASE_URL_FOR_API = "https://nf-api.onrender.com/";

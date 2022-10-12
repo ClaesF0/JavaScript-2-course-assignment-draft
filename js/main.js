@@ -1,4 +1,4 @@
-import './style.css'
+import '../style.css'
 
 //only noroff adress
 
@@ -24,3 +24,6 @@ import './style.css'
 //user can edit profile media
 //user can follow/unfollow a profile
 //user can react to a post content item
+
+
+

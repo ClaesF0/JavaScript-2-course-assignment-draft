@@ -5,13 +5,13 @@ const userKey = "user";
 
 function saveToken (token) {
     console.log("token: ", token)
-    console.log("tokenKey: ", tokenKey)
-    saveToStorage(tokenKey, token);
+    console.log("bearerKey: ", bearerKey)
+    saveToStorage(bearerKey, token);
 }
 
 
 function getToken() {
-    return getFromStorage(tokenKey);
+    return getFromStorage(bearerKey);
 }
 
 // save user object
@@ -48,5 +48,6 @@ function clearStorage() {
 }
 
 export {getToken, saveToken, storeUserSession, collectUserName, clearStorage}
+
 
 console.log('LOCAL-STORAGE-RELATED.JS SUCCESSFUL',);

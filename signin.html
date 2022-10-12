@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign in</title>
-    <script type="module" src="./sign-in-and-sign-up.js" defer></script>
-    <script type="module" src="./main.js" defer></script>
+    <script type="module" src="./js/sign-in.js" defer></script>
+    <script type="module" src="./js/main.js" defer></script>
   </head>
   <body>
 <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
@@ -14,14 +14,15 @@
     </h1>
     <p class="max-w-md mx-auto mt-4 text-center text-gray-500"> 
     </p>
-    <form action="" class="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl">
-      <p class="text-lg font-medium">Sign in to your account</p>
+    <form id="signin-form" action="" class="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl">
+      <p class="text-lg text-center font-medium">Sign in to your account</p>
+      <span id="errorMessage" class="text-lg font-medium text-red-600"></span>
       <div>
         <label for="email" class="text-sm font-medium">Email</label>
         <div class="relative mt-1">
           <input
             type="email"
-            id="email"
+            id="emailField"
             class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
             placeholder="Enter email"
           />
@@ -41,6 +42,16 @@
               />
             </svg>
           </span>
+          <span
+                    id="emailFieldError"
+                    class="hidden text-sm ml-4 text-red-600"
+            >
+                An email address is required</span>
+              <span
+                    id="emailInvalidError"
+                    class="hidden text-sm ml-4 text-red-600"
+            >
+                Enter a valid noroff.no or stud.noroff.no mail adress</span>
         </div>
       </div>
       <div>
@@ -49,7 +60,7 @@
         <div class="relative mt-1">
           <input
             type="password"
-            id="password"
+            id="passwordField"
             class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
             placeholder="Enter password"
           />
@@ -75,8 +86,18 @@
               />
             </svg>
           </span>
+          <span
+                    id="passwordFieldError"
+                    class="hidden text-sm ml-4 text-red-600"
+            >
+                </span>
         </div>
       </div>
+      <span
+                    id="capsLockReminder"
+                    class="hidden text-sm ml-4 text-red-600"
+            >
+                CAPS LOCK IS ON </span>
       <button
         type="submit"
         class="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
