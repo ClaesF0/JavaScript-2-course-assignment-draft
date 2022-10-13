@@ -6,14 +6,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="module" src="./js/main.js" defer></script>
     <script type="module" src="./js/local-storage-related.js" defer></script>
+    <script type="module" src="./js/components/all-components.js"></script>
+    <script type="module" src="./js/components/header.js"></script>
+    <script type="module" src="./js/components/get-posts-in-feed.js" defer></script>
     <title>Index</title>
 </head>
 <body>
 <header>
     <div id="navBar"></div>
-</header>
-
-  
     
+    <div class="bg-blue-900">
+        <div class="flex">
+
+            <div class="w-2/5 text-white h-12 pl-32 py-4 h-auto">
+                <!--left menu-->
+              
+              
+        <div class="flex-shrink-0 flex hover:bg-blue-00 rounded-full p-4 mt-12 mr-2">
+          <a href="#" class="flex-shrink-0 group block">
+            <div class="flex items-center">
+              <div>
+                <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="" />
+              </div>
+              <div class="ml-3">
+                <p class="text-base leading-6 font-medium text-white">
+                  Sonali Hirave
+                </p>
+                <p class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                  @ShonaDesign
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+              
+        </div>
+
+            <div class="w-3/5 border border-gray-600 h-auto  border-t-0">
+                <!--middle wall-->
+             
+                <div class="flex">
+                    <div class="flex-1 m-2">
+                        <h2 class="px-4 py-2 text-xl font-semibold text-white">Home</h2>
+                    </div>
+                    <div class="flex-1 px-4 py-2 m-2">
+                        <a href="" class=" text-2xl font-medium rounded-full text-white hover:bg-blue-800 hover:text-blue-300 float-right">
+                            <svg class="m-2 h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><g><path d="M22.772 10.506l-5.618-2.192-2.16-6.5c-.102-.307-.39-.514-.712-.514s-.61.207-.712.513l-2.16 6.5-5.62 2.192c-.287.112-.477.39-.477.7s.19.585.478.698l5.62 2.192 2.16 6.5c.102.306.39.513.712.513s.61-.207.712-.513l2.16-6.5 5.62-2.192c.287-.112.477-.39.477-.7s-.19-.585-.478-.697zm-6.49 2.32c-.208.08-.37.25-.44.46l-1.56 4.695-1.56-4.693c-.07-.21-.23-.38-.438-.462l-4.155-1.62 4.154-1.622c.208-.08.37-.25.44-.462l1.56-4.693 1.56 4.694c.07.212.23.382.438.463l4.155 1.62-4.155 1.622zM6.663 3.812h-1.88V2.05c0-.414-.337-.75-.75-.75s-.75.336-.75.75v1.762H1.5c-.414 0-.75.336-.75.75s.336.75.75.75h1.782v1.762c0 .414.336.75.75.75s.75-.336.75-.75V5.312h1.88c.415 0 .75-.336.75-.75s-.335-.75-.75-.75zm2.535 15.622h-1.1v-1.016c0-.414-.335-.75-.75-.75s-.75.336-.75.75v1.016H5.57c-.414 0-.75.336-.75.75s.336.75.75.75H6.6v1.016c0 .414.335.75.75.75s.75-.336.75-.75v-1.016h1.098c.414 0 .75-.336.75-.75s-.336-.75-.75-.75z"></path></g>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <hr class="border-gray-600">
+                <!--middle creat tweet-->
+                <div class="flex">
+                    <div class="m-2 w-10 py-1">
+                        <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="" />
+                    </div>
+                    <div class="flex-1 px-2 pt-2 mt-2">
+                        <textarea id="textField" class=" bg-transparent text-gray-400 font-medium text-lg w-full" rows="2" cols="50" placeholder="Do you too think it smells like updog here?"></textarea>
+                    </div>                    
+                </div>
+                <!--middle creat tweet below icons-->
+                <div class="flex">
+                    <div class="flex-1">
+                        <button id="postBtn" class="bg-blue-400 mt-2 mb-2 hover:bg-blue-600 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
+                            Post
+                          </button>
+                          
+                    </div>
+                    
+                </div>
+                <hr class="border-blue-800 border-4">
+<div id="postcontainer"></div>
+
+           
+
+
+
+        </div>
+
+
+            <div class="w-2/5 h-12">
+                <!--right menu-->
+
+                <div class="relative text-gray-300 w-80 p-5 pb-0 mr-16">
+                    <button type="submit" class="absolute ml-4 mt-3 mr-4">
+                        <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                          <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
+                        </svg>
+                      </button>
+
+                    <input type="search" name="search" placeholder="Search Twitter" class="bg-blue-800 h-10 px-10 pr-5 w-full rounded-full text-sm focus:outline-none bg-purple-white shadow rounded border-0">
+                    
+                </div>
+        
+
+
+                 
+                <!--third-people suggetion to follow section-->
+                
+                <div class="max-w-sm rounded-lg bg-blue-800 overflow-hidden shadow-lg m-4 mr-20">
+                    <div class="flex">
+                        
+                    </div>
+
+    
+
+                   
+
+                    <!--show more-->
+
+                    
+                
+                </div>
+            
+            <div class="flow-root m-6 inline">
+                <div class="flex-1">
+                    <a href="#">
+                    <p class="text-sm leading-6 font-medium text-gray-500">Get a life.</p>
+                  	</a>
+           		 </div>
+                <div class="flex-2">
+                    <p class="text-sm leading-6 font-medium text-gray-600"> © 2022 Claes.</p>
+                </div>
+                </div>
+        </div>
+
+    </div>
+        
+    </div>
+
+</header>
 </body>
 </html>
