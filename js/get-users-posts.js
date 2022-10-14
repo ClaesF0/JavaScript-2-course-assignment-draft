@@ -1,18 +1,19 @@
 import moment from "moment";
-import {READ_POSTS_URL} from "../api-related"
-import {getToken} from "../local-storage-related"
+import {GET_USERS_OWN_POSTS_URL, DELETE_USER_POST_BY_ID} from "../js/api-related"
+import {getToken} from "../js/local-storage-related"
 
 let now = moment(new Date()); //todays date
 //moment correctly installed and running
 const postContainer = document.getElementById("postcontainer");
+const errorContainer = document.getElementById("errorContainer")
 
 const bearerKey = getToken();
 if(!bearerKey){
     location.replace("signin.html")
 }
 
-(async function getEveryPost() {
-    const response = await fetch(READ_POSTS_URL, {
+(async function getUsersPost() {
+    const response = await fetch(GET_USERS_OWN_POSTS_URL, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -20,25 +21,24 @@ if(!bearerKey){
         }
     })
     if (response.ok) {
-        const posts = await response.json();
+        const postsJson = await response.json();
+        postContainer.innerHTML ="";
+        const {posts} = postsJson;
         if (!posts.length) {
-            //postsNotificationMessage.innerHTML = "Sorry no posts currently";
+            errorContainer.innerHTML = "You have no posts";
         } else {
-            const listOfPosts = posts.map((post) => {
+            const amountOfPosts = posts.length;
+            for (let i = 0; i < amountOfPosts; i++){
+                console.log(posts[i])
                 
+            }
+            
+
+
+            const listOfPosts = posts.map((post) => {
                 const postBody = post.body;
                 const postTitle = post.title;
-                const postAuthor = post.owner;
                 const postBirthday = post.created;
-                
-                const tags = posts.tags;
-                console.log("tags før loop",tags)
-                for (let i = 0, l=post.tags.length; i < l; i++) {
-                const tags = post.tags[i];
-                console.log("tags i slutt av loop",tags)
-                }
-
-                
                 const timestamp = moment(postBirthday).fromNow();
                 return (
                     `
@@ -53,9 +53,9 @@ if(!bearerKey){
                             </div>
                             <div class="ml-3">
                               <p class="text-base leading-6 font-medium text-white">
-                                ${postAuthor}
+                                Sonali Hirave 
                                 <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                 ${timestamp}
+                                    @ShonaDesign . ${timestamp}
                                   </span>
                                    </p>
                             </div>
@@ -70,10 +70,6 @@ if(!bearerKey){
                         </h2>
                         <p class="text-base width-auto font-medium ml-4  text-white flex-shrink">
                           ${postBody}
-                        </p>
-                        <br>
-                        <p style="font-size: 10px;" class="width-auto font-thin ml-4 text-white flex-shrink">
-                          ${"#"+tags+" "}
                         </p>
                         <!--<div class="md:flex-shrink pr-6 pt-3">
                             <img class="rounded-lg w-full h-64" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=448&q=80" alt="Woman paying for a purchase">

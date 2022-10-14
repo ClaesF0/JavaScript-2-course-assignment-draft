@@ -1,5 +1,5 @@
 import { collectUserName } from "../local-storage-related";
-
+import {clearStorage} from "../local-storage-related"
 
 function createHeaderBar() {
   const { currentPage } = document.location;
@@ -8,42 +8,70 @@ function createHeaderBar() {
     const userName = collectUserName();
     let links;
     links = `
-            <li class="p-8"><a href="/signup.html" class="${currentPage === "/signup.html" ? "text-blue-600" : ""}">SignUp</a></li>
-            <li class="p-8"><a href="/signin.html" class="${currentPage === "/signin.html" ? "text-blue-600" : ""}">LogIn</a></li>
+            <li class="p-8"><a href="/signup.html" class="${currentPage === "/signup.html" ? "text-white" : ""}">SignUp</a></li>
+            <li class="p-8"><a href="/signin.html" class="${currentPage === "/signin.html" ? "text-white" : ""}">LogIn</a></li>
             `;
     if (userName) {
       links = `
     <li>
-      <a href="index.html" class="${currentPage === "/index.html" ? "text-blue-600" : ""} block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Feed</a>
+      <a href="index.html" class="${currentPage === "/index.html" ? "text-white" : ""} block py-2 p-1   bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Feed </a>
+    </li>
+    <!--<li>
+      <a href="make-post.html" class="${currentPage === "/make-post.html" ? "text-white" : ""}block py-2 p-1  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"> Make new post </a>
+    </li>-->
+    <li>
+      <a href="my-posts.html" class="${currentPage === "/my-posts.html" ? "text-white" : ""}block py-2 p-1  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"> My posts </a>
     </li>
     <li>
-      <a href="make-post.html" class="${currentPage === "/make-post.html" ? "text-blue-600" : ""}block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Make a new post</a>
-    </li>
-    <li>
-      <a href="my-posts.html" class="${currentPage === "/my-posts.html" ? "text-blue-600" : ""}block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">My posts</a>
-    </li>
-    <li>
-      <a href="profile.html" class="${currentPage === "/profile.html" ? "text-blue-600" : ""}block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">${userName}'s profile</a>
+      <a href="profile.html" class="${currentPage === "/profile.html" ? "text-white" : ""}block py-2 p-1  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"> ${userName}'s profile </a>
     </li>     
 `;
     }
     navBar.innerHTML = 
     `
     <nav class="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
-        <div class="container flex flex-wrap justify-between items-center mx-auto">
+        <div class="container flex flex-wrap justify-between items-center mx-auto w-4/5">
         <a href="index.html" class="flex items-center">
         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Piece of Mind</span>
         </a>
-        <ul class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        
+        <ul class="flex flex-row p-1 mt-1 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         ${links}
         </ul>
-        <button type="button" id="logout-btn" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Log Out</button>
+        <div class="relative text-gray-300 w-60 px-2 sm:px-4 py-2.5 mr-2">
+              <button type="submit" class="absolute ml-4 mt-3 mr-4">
+                  <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
+                  </svg>
+                </button>
+
+              <input type="search" name="search" placeholder="Search" class="bg-blue-800 h-10 px-10 pr-5 w-full rounded-full text-sm focus:outline-none bg-purple-white shadow rounded border-0">
+              
+          </div>
+        <button type="button" id="logout-btn" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Log Out</button>
         </div>
       </nav>`;
   }
+  
+
+  const logoutbtn = document.getElementById("logout-btn");
+
+if (logoutbtn) {
+  logoutbtn.addEventListener("click", function () {
+        clearStorage();
+        window.location.replace("/signin.html");
+    })
 }
 
 
+}
+
+
+
+
+
+
+createHeaderBar();
 
 
 export {createHeaderBar};
