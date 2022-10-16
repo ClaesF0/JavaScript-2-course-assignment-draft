@@ -30,13 +30,32 @@ if(!bearerKey){
                 const postTitle = post.title;
                 const postAuthor = post.owner;
                 const postBirthday = post.created;
+                /*
+                const hvaerforskjellentags = post.tags;
+                console.log('hvaerforskjellentags',hvaerforskjellentags);
+
+                const hvaerforskjellentagsførste = post.tags[0];
+                console.log('hvaerforskjellentagsførste',hvaerforskjellentagsførste);
                 
                 const tags = posts.tags;
-                console.log("tags før loop",tags)
+
+                //console.log("tags før loop",tags)
                 for (let i = 0, l=post.tags.length; i < l; i++) {
-                const tags = post.tags[i];
-                console.log("tags i slutt av loop",tags)
+                
+                const looptags = post.tags[i].length;
+                console.log("looptags i slutt av loop",looptags)
+
+                const unfilteredTags = post.tags[i]
+                //console.log('unfilteredTags',unfilteredTags);
+                const filteredTags = unfilteredTags.filter(n => n !== undefined && length >=1);
+                console.log('filteredTags',filteredTags);
                 }
+
+                ${"#"+tags+" "}
+                */
+                
+
+
 
                 
                 const timestamp = moment(postBirthday).fromNow();
@@ -73,7 +92,7 @@ if(!bearerKey){
                         </p>
                         <br>
                         <p style="font-size: 10px;" class="width-auto font-thin ml-4 text-white flex-shrink">
-                          ${"#"+tags+" "}
+                          
                         </p>
                         <!--<div class="md:flex-shrink pr-6 pt-3">
                             <img class="rounded-lg w-full h-64" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=448&q=80" alt="Woman paying for a purchase">
