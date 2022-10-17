@@ -15,7 +15,7 @@ const DELETE_USER_POST_BY_ID = BASE_URL_FOR_API + `api/v1/social/posts`
 
 //PROFILES GET
 
-//const GET_PROFILEINFO_URL = BASE_URL_FOR_API + "/api/v1/social/profiles/<name>"
+const GET_PROFILEINFO_URL = BASE_URL_FOR_API + "/api/v1/social/profiles/"
 
 
 export {
@@ -25,7 +25,8 @@ export {
     CREATE_POST_URL, 
     READ_POSTS_URL, 
     GET_USERS_OWN_POSTS_URL, 
-    DELETE_USER_POST_BY_ID
+    DELETE_USER_POST_BY_ID,
+    GET_PROFILEINFO_URL
 }; 
 
 

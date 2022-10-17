@@ -1,6 +1,9 @@
 import moment from "moment";
-import {READ_POSTS_URL} from "../api-related"
+//import { stringify } from "postcss";
+import {READ_POSTS_URL, GET_PROFILEINFO_URL} from "../api-related"
 import {getToken} from "../local-storage-related"
+
+
 
 let now = moment(new Date()); //todays date
 //moment correctly installed and running
@@ -10,6 +13,21 @@ const bearerKey = getToken();
 if(!bearerKey){
     location.replace("signin.html")
 }
+
+const options = {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTMyLCJuYW1lIjoiY2xhZXMiLCJlbWFpbCI6ImNsYWVzLmZvbGtlc3RhZEBzdHVkLm5vcm9mZi5ubyIsImF2YXRhciI6bnVsbCwiYmFubmVyIjpudWxsLCJpYXQiOjE2NjQzNjQwMDh9.h62gb9pNRAZmy8y-3BRQRhGUCf_FIjaj28AFHq3rc7w'
+    }
+  };
+  
+  fetch('https://nf-api.onrender.com/api/v1/social/profiles', options)
+    .then(response => response.json())
+    .then(response => console.log("dette er respons fra autogenerert API",response))
+    .catch(err => console.error(err));
+    
+
+
 
 (async function getEveryPost() {
     const response = await fetch(READ_POSTS_URL, {
@@ -30,34 +48,27 @@ if(!bearerKey){
                 const postTitle = post.title;
                 const postAuthor = post.owner;
                 const postBirthday = post.created;
-                /*
-                const hvaerforskjellentags = post.tags;
-                console.log('hvaerforskjellentags',hvaerforskjellentags);
-
-                const hvaerforskjellentagsførste = post.tags[0];
-                console.log('hvaerforskjellentagsførste',hvaerforskjellentagsførste);
                 
-                const tags = posts.tags;
-
-                //console.log("tags før loop",tags)
-                for (let i = 0, l=post.tags.length; i < l; i++) {
                 
-                const looptags = post.tags[i].length;
-                console.log("looptags i slutt av loop",looptags)
+                  
+                  const arr = [post.tags[0]];
+  
+                  const results = arr.filter(element => {
+                  return element !== undefined;
+                  });
+                  
+                  console.log("results", results[0]);
 
-                const unfilteredTags = post.tags[i]
-                //console.log('unfilteredTags',unfilteredTags);
-                const filteredTags = unfilteredTags.filter(n => n !== undefined && length >=1);
-                console.log('filteredTags',filteredTags);
-                }
+                  const unfilteredArr = [results[0]]
+  
+                  const filteredTags = unfilteredArr.filter(element => {
+                      return element !== undefined && String.length>0;
+                      });
+                      console.log('filteredTags[0]',filteredTags[0]);
+                      console.log('filteredTags',filteredTags);
 
-                ${"#"+tags+" "}
-                */
-                
+                const tags = ("#"+filteredTags+" ")
 
-
-
-                
                 const timestamp = moment(postBirthday).fromNow();
                 return (
                     `
@@ -92,7 +103,7 @@ if(!bearerKey){
                         </p>
                         <br>
                         <p style="font-size: 10px;" class="width-auto font-thin ml-4 text-white flex-shrink">
-                          
+                        ${tags}
                         </p>
                         <!--<div class="md:flex-shrink pr-6 pt-3">
                             <img class="rounded-lg w-full h-64" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=448&q=80" alt="Woman paying for a purchase">
