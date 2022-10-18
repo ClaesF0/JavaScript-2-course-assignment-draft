@@ -14,7 +14,7 @@ if(!bearerKey){
 
 
 async function getTheID() {
-    console.log("fak u dolan")
+    
     const response = await fetch(READ_POSTS_URL, {
         method: "GET",
         headers: {
