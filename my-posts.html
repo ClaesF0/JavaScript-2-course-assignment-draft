@@ -10,6 +10,7 @@
     <script type="module" src="./js/components/get-posts-in-feed.js" defer></script>
     <script type="module" src="./js/make-a-post.js" defer></script>
     <script type="module" src="./js/get-users-posts.js" defer></script>
+    <script type="module" src="./js/edit-a-post.js" defer></script>
 
     <title>My posts</title>
 </head>
@@ -47,12 +48,13 @@
 
           <hr class="border-gray-600">
           <!--middle creat tweet-->
+          <!--
           <div class="flex">
               <div class="m-2 w-10 py-1">
                   <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="" />
               </div>
               <div class="flex-1 px-2 pt-2 mt-2">
-                <form id="postForm" action="">
+                <form id="editPostForm" action="">
                 <textarea id="titleField" class=" bg-transparent text-gray-400 font-medium text-lg w-full" rows="1" cols="50" placeholder="Title goes here"></textarea>
                 <p id= "postTitleErrorMsg" class="hidden text-red-400 ">Title is required</p>  
                 <textarea id="textField" class=" bg-transparent text-gray-400 font-medium text-lg w-full" rows="2" cols="50" placeholder="Random thought goes here"></textarea>
@@ -66,44 +68,20 @@
                 </div>
                 </form>
               </div>                    
-          </div>
+          </div> 
+        -->
           <!--middle creat tweet below icons-->
-          
           <hr class="border-blue-800 border-4">
 <div id="postcontainer"></div>
-
-     
-
-
-
   </div>
-
-
       <div class="w-1/5 h-12">
           <!--right menu-->
-
-          
-  
-
-
-           
           <!--third-people suggetion to follow section-->
-          
           <div class="max-w-sm rounded-lg bg-blue-800 overflow-hidden shadow-lg m-4 mr-20">
               <div class="flex">
-                  
               </div>
-
-
-
-             
-
               <!--show more-->
-
-              
-          
           </div>
-      
       <div class="m-6 inline">
           <div class="flex-1">
               <a href="#">
@@ -115,10 +93,7 @@
           </div>
           </div>
   </div>
-
 </div>
-  
 </div>
-
 </body>
 </html>

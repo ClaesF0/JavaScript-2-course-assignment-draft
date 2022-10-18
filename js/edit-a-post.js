@@ -1,13 +1,37 @@
-import {CREATE_POST_URL} from "../js/api-related"
+import postcss from "postcss";
+import {UPDATE_USERS_POST_URL, RETRIEVE_POST_BY_ID} from "../js/api-related"
 import {getToken} from "../js/local-storage-related"
+
 
 const titleField = document.getElementById("titleField");
 const textField = document.getElementById("textField");
 const postBtn = document.getElementById("postBtn");
 const postTitleErrorMsg = document.getElementById("postTitleErrorMsg");
 const postBodyErrorMsg = document.getElementById("postBodyErrorMsg");
-const postForm = document.getElementById("postForm");
 
+
+ const editPostForm = document.getElementById("editPostForm");
+
+    const editFormBtn = document.getElementById("editFormBtn");
+    const deletePostBtn = document.getElementById("deletePostBtn")
+    
+    console.log('editPostForm',editPostForm);
+    console.log('editFormBtn',editFormBtn);
+    console.log('deletePostBtn',deletePostBtn);
+    console.log( "ready!" );
+
+
+$( document ).ready(function() {
+    console.log( "document loaded" );
+});
+
+$( window ).on( "load", function() {
+    console.log( "window loaded" );
+});
+
+
+
+/*
 postForm.addEventListener("submit", function (event) {
     event.preventDefault();
     var approvedTitleField = false;
@@ -70,3 +94,4 @@ postForm.addEventListener("submit", function (event) {
     }
 }
 )
+*/

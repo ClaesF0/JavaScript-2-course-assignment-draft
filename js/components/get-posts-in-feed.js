@@ -1,9 +1,7 @@
 import moment from "moment";
 //import { stringify } from "postcss";
-import {READ_POSTS_URL, GET_PROFILEINFO_URL} from "../api-related"
+import {READ_POSTS_URL, RETRIEVE_POST_BY_ID, GET_PROFILEINFO_URL} from "../api-related"
 import {getToken} from "../local-storage-related"
-
-
 
 let now = moment(new Date()); //todays date
 //moment correctly installed and running
@@ -14,22 +12,9 @@ if(!bearerKey){
     location.replace("signin.html")
 }
 
-const options = {
-    method: 'GET',
-    headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTMyLCJuYW1lIjoiY2xhZXMiLCJlbWFpbCI6ImNsYWVzLmZvbGtlc3RhZEBzdHVkLm5vcm9mZi5ubyIsImF2YXRhciI6bnVsbCwiYmFubmVyIjpudWxsLCJpYXQiOjE2NjQzNjQwMDh9.h62gb9pNRAZmy8y-3BRQRhGUCf_FIjaj28AFHq3rc7w'
-    }
-  };
-  
-  fetch('https://nf-api.onrender.com/api/v1/social/profiles', options)
-    .then(response => response.json())
-    .then(response => console.log("dette er respons fra autogenerert API",response))
-    .catch(err => console.error(err));
-    
 
-
-
-(async function getEveryPost() {
+async function getTheID() {
+    console.log("fak u dolan")
     const response = await fetch(READ_POSTS_URL, {
         method: "GET",
         headers: {
@@ -37,73 +22,117 @@ const options = {
             "Authorization": `Bearer ${bearerKey}`
         }
     })
-    if (response.ok) {
         const posts = await response.json();
-        if (!posts.length) {
-            //postsNotificationMessage.innerHTML = "Sorry no posts currently";
-        } else {
-            const listOfPosts = posts.map((post) => {
+        const listOfPosts = posts.map((post) => {
+        const postID = post.id;
+        const ALL_POST_INFO_URL = "?_author=true&_comments=true&_reactions=true" 
                 
-                const postBody = post.body;
-                const postTitle = post.title;
-                const postAuthor = post.owner;
-                const postBirthday = post.created;
-                
-                
-                  
-                  const arr = [post.tags[0]];
-  
-                  const results = arr.filter(element => {
-                  return element !== undefined;
-                  });
-                  
-                  console.log("results", results[0]);
+        const allPostInfo = {
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${bearerKey}`
+      }
+    };
+        async function getAllPostInfo(){
+          // gets the response from the api and put it inside a constant
+          const response = await fetch(READ_POSTS_URL+"/"+`${postID}`+ALL_POST_INFO_URL, allPostInfo);
+          //the response have to be converted to json type file, so it can be used
+          const allPostData = await response.json();
+          //the addData adds the object "data" to an array
+          addData(allPostData)
+        }
 
-                  const unfilteredArr = [results[0]]
-  
-                  const filteredTags = unfilteredArr.filter(element => {
-                      return element !== undefined && String.length>0;
-                      });
-                      console.log('filteredTags[0]',filteredTags[0]);
-                      console.log('filteredTags',filteredTags);
+        function addData(noe) {
+          // the push method add a new item to an array
+          // here it will be adding the object from the function each time it is called
+          allPostData.push(noe);
+          //the fetched data is available only on this scope
+          //console.log("This is the value of date inside the function addData:")
+          //console.log("allPostData",allPostData)
+          for (let i = 0; i < allPostData.length; i++) {
+            //console.log("loop",i, allPostData[i]); 
 
-                const tags = ("#"+filteredTags+" ")
+            
 
-                const timestamp = moment(postBirthday).fromNow();
-                return (
-                    `
-                    <hr class="border-gray-600">
+            
+
+            const entirePostData = allPostData[i];
+            [entirePostData].filter(item => !!item);
+
+            const authorName = entirePostData.author.name;
+            console.log('authorName',authorName);
+            const authorEmail = entirePostData.author.email;
+            console.log('authorEmail',authorEmail);
+
+            const authorAvatar = entirePostData.author.avatar;
+            console.log('authorAvatar',authorAvatar);
+
+            const postTitle = entirePostData.title;
+            console.log('postTitle',postTitle);
+            
+            const postBody = entirePostData.body;
+            console.log('postBody',postBody);
+            
+            const postMediaString = entirePostData.media;
+            console.log('postMediaString',postMediaString);
+            
+            const postReactionsArr = entirePostData.reactions.length;
+            console.log('postReactionsArr',postReactionsArr);
+            
+            const postCommentsArr = entirePostData.comments.length;
+            console.log('postCommentsArr',postCommentsArr);
+            
+            const postCreated = entirePostData.created;
+            console.log('postCreated',postCreated);
+            
+            const postUpdated = entirePostData.updated;
+            console.log('postUpdated',postUpdated);
+            
+            const postID = entirePostData.id;
+            console.log('postID',postID);
+            
+            const countcomments = entirePostData._count.comments;
+            console.log('countcomments',countcomments);
+            
+            const countreactions = entirePostData._count.reactions;
+            console.log('countreactions',countreactions);
+
+            postContainer.insertAdjacentHTML= 
+            
+            `
+            
+            <hr class="border-gray-600">
                     <div class="flex flex-shrink-0 p-4 pb-0">
-                    
-                                <span class="absolute inset-0" aria-hidden="true"></span>
-                        <a href="#" class="flex-shrink-0 group block">
+                    <!--<a href="/single-post.html?post_id=${postID}" class="flex-shrink-0 group block">-->
+                                
+                        
+                        
                           <div class="flex items-center">
                             <div>
-                              <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="" />
+                              <img class="inline-block h-10 w-10 rounded-full" src="${authorAvatar}" alt="" />
                             </div>
                             <div class="ml-3">
                               <p class="text-base leading-6 font-medium text-white">
-                                ${postAuthor}
+                               ${authorName}
                                 <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                 ${timestamp}
+                                 TIMESTAMP ${authorEmail}
                                   </span>
                                    </p>
                             </div>
                           </div>
                         </a>
                     </div>
-                    <a href="/single-post.html?post_id=${post.id}" class="block focus:outline-none">
+                    <a href="/single-post.html?post_id=POSTID" class="block focus:outline-none">
                     <div class="pl-16">
-                    <h5 class="font-medium leading-tight text-xl mt-0 mb-2 p-4 text-white">${postTitle}</h5>
-                    
-                   
-                        </h2>
+                    <h5 class="font-medium leading-tight text-xl mt-0 mb-2 p-4 text-white">TITTEL</h5>
+                        
                         <p class="text-base width-auto font-medium ml-4  text-white flex-shrink">
                           ${postBody}
                         </p>
                         <br>
                         <p style="font-size: 10px;" class="width-auto font-thin ml-4 text-white flex-shrink">
-                        ${tags}
+                        TAGS
                         </p>
                         <!--<div class="md:flex-shrink pr-6 pt-3">
                             <img class="rounded-lg w-full h-64" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=448&q=80" alt="Woman paying for a purchase">
@@ -148,10 +177,69 @@ const options = {
                             </div>
                         </div>
                       </div>
-                      </a>
                       <hr class="border-gray-600">
                     </div>
                     </div>
+                </li>
+            `
+            }
+        }   
+        //Calls the function that fetches the data
+        getAllPostInfo()
+    })};
+    getTheID();
+        let allPostData = [];
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(async function getEveryPost() {
+    const response = await fetch(READ_POSTS_URL, {method: "GET",headers: {"Content-Type": "application/json","Authorization": `Bearer ${bearerKey}`}})
+    if (response.ok) {
+        const posts = await response.json();
+        if (!posts.length) {
+            //postsNotificationMessage.innerHTML = "Sorry no posts currently";
+        } else {
+            const listOfPosts = posts.map((post) => {
+                
+                const postBody = post.body;
+                const postTitle = post.title;
+                const postAuthor = post.owner;
+                const postBirthday = post.created;
+                const postID = post.id;
+                  const arr = [post.tags[0]];
+                  const results = arr.filter(element => {
+                  return element !== undefined;
+                  });
+                  const unfilteredArr = [results[0]]
+                  const filteredTags = unfilteredArr.filter(element => {
+                      return element !== undefined && String.length>0;
+                      });
+                const tags = ("#"+filteredTags+" ")
+
+                const timestamp = moment(postBirthday).fromNow();
+                return (
+                    `
+                    <hr class="border-gray-600">
+                    <div class="flex flex-shrink-0 p-4 pb-0">
+                    <!--<a href="/single-post.html?post_id=${postID}" class="flex-shrink-0 group block">-->
+                    
+                                <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                 ${timestamp}
+                                  </span>
+                                
                 </li>
             `
             )
@@ -169,5 +257,7 @@ const options = {
     console.log(err);
    // postsNotificationMessage.innerHTML = err
 });
-
-
+/*
+export { postID }
+console.log(postID)
+*/
