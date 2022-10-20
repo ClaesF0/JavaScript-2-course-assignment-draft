@@ -2,6 +2,12 @@ import moment from "moment";
 //import { stringify } from "postcss";
 import {READ_POSTS_URL, GET_PROFILEINFO_URL} from "../api-related"
 import {getToken} from "../local-storage-related"
+//import {getTheID} from "../components/access-all-post-details"
+
+
+
+
+
 
 
 
@@ -9,27 +15,25 @@ let now = moment(new Date()); //todays date
 //moment correctly installed and running
 const postContainer = document.getElementById("postcontainer");
 
+
+
+
 const bearerKey = getToken();
 if(!bearerKey){
     location.replace("signin.html")
 }
 
-const options = {
-    method: 'GET',
-    headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTMyLCJuYW1lIjoiY2xhZXMiLCJlbWFpbCI6ImNsYWVzLmZvbGtlc3RhZEBzdHVkLm5vcm9mZi5ubyIsImF2YXRhciI6bnVsbCwiYmFubmVyIjpudWxsLCJpYXQiOjE2NjQzNjQwMDh9.h62gb9pNRAZmy8y-3BRQRhGUCf_FIjaj28AFHq3rc7w'
-    }
-  };
-  
-  fetch('https://nf-api.onrender.com/api/v1/social/profiles', options)
-    .then(response => response.json())
-    .then(response => console.log("dette er respons fra autogenerert API",response))
-    .catch(err => console.error(err));
-    
+const ALL_POST_INFO_URL = "?_author=true&_comments=true&_reactions=true" 
+const allPostInfo = {method: 'GET',headers: {"Content-Type": "application/json","Authorization": `Bearer ${bearerKey}`}}; 
 
+const allPostInfoEndpoint = {
+                    method: 'GET',
+                    headers: {
+                      Authorization: `Bearer ${bearerKey}`
+                    }
+                  };
 
-
-(async function getEveryPost() {
+(async function getAllPosts() {
     const response = await fetch(READ_POSTS_URL, {
         method: "GET",
         headers: {
@@ -37,79 +41,137 @@ const options = {
             "Authorization": `Bearer ${bearerKey}`
         }
     })
+    console.log("get all posts response: ", response)
     if (response.ok) {
         const posts = await response.json();
+        //console.log(posts);
+        //console.log("GET POSTS SUCCEEDED!!  🥳 🤗🤗");
+        let now = moment(new Date()); //today's date
+        //console.log("posts: ",posts)
         if (!posts.length) {
             //postsNotificationMessage.innerHTML = "Sorry no posts currently";
         } else {
-            const listOfPosts = posts.map((post) => {
-                
+            const listOfHtmlPosts = posts.map((post) => {
+                //console.log("post: ", post);
                 const postBody = post.body;
                 const postTitle = post.title;
-                const postAuthor = post.owner;
-                const postBirthday = post.created;
+                const createdDate = post.created;
+                const postID = post.id;
+                const daysSinceCreated = now.diff(createdDate, 'days');
+
                 
                 
+                //console.log("individual endpoint",READ_POSTS_URL+"/"+`${postID}`+ALL_POST_INFO_URL, allPostInfoEndpoint);
+
+                  fetch(READ_POSTS_URL+"/"+`${postID}`+ALL_POST_INFO_URL, allPostInfoEndpoint)
+                
                   
-                  const arr = [post.tags[0]];
-  
-                  const results = arr.filter(element => {
-                  return element !== undefined;
-                  });
-                  
-                  console.log("results", results[0]);
+                  .then((response) => {
+                        return response.json();
+                    })
+                    .then((data) => {
+                        const allPostInfo = data;
+                        //console.log('data ',data);
+                        const author = allPostInfo.author.name;
+                        //console.log("author. so close.",author)
 
-                  const unfilteredArr = [results[0]]
-  
-                  const filteredTags = unfilteredArr.filter(element => {
-                      return element !== undefined && String.length>0;
-                      });
-                      console.log('filteredTags[0]',filteredTags[0]);
-                      console.log('filteredTags',filteredTags);
+                        const authorName = allPostInfo.author.name;
+                        //console.log('authorName',authorName);
+                        const authorEmail = allPostInfo.author.email;
+                        //console.log('authorEmail',authorEmail);
 
-                const tags = ("#"+filteredTags+" ")
+                        const authorAvatar = allPostInfo.author.avatar;
+                        //console.log('authorAvatar',authorAvatar);
 
-                const timestamp = moment(postBirthday).fromNow();
-                return (
-                    `
-                    <hr class="border-gray-600">
-                    <div class="flex flex-shrink-0 p-4 pb-0">
-                    
-                                <span class="absolute inset-0" aria-hidden="true"></span>
+                        const postTitle = allPostInfo.title;
+                        //console.log('postTitle',postTitle);
+
+                        const postBody = allPostInfo.body;
+                        //console.log('postBody',postBody);
+
+                        const postMediaString = allPostInfo.media;
+                        //console.log('postMediaString',postMediaString);
+
+                        //const postReactionsArr = allPostInfo.reactions.length;
+                        //console.log('postReactionsArr',postReactionsArr);
+
+                        const postCommentsArr = allPostInfo.comments.length;
+                        //console.log('postCommentsArr',postCommentsArr);
+
+                        const postCreated = allPostInfo.created;
+                        //console.log('postCreated',postCreated);
+                        const timestamp = moment(postCreated).fromNow();
+
+                        const postUpdated = allPostInfo.updated;
+                        //console.log('postUpdated',postUpdated);
+                        const updatedTimestamp = "Updated "+moment(postCreated).fromNow();
+                        //console.log('updatedTimestamp',updatedTimestamp);
+
+                        const tags = allPostInfo.tags; 
+                        //console.log('',tags);
+                        
+
+                        const postID = allPostInfo.id;
+                        //console.log('postID',postID);
+
+                        const countcomments = allPostInfo._count.comments;
+                        //console.log('countcomments',countcomments);
+
+                        const countreactions = allPostInfo._count.reactions;
+                        //console.log('countreactions',countreactions);
+
+                        const postContainer = document.getElementById("postcontainer");
+                        let newPostData = `
+                        <li class="list-none">
+                        <hr class="border-gray-600">
+                        <div class="flex flex-shrink-0 p-4 pb-0">
                         <a href="#" class="flex-shrink-0 group block">
                           <div class="flex items-center">
                             <div>
                               <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="" />
                             </div>
-                            <div class="ml-3">
+                            <div class="ml-4">
                               <p class="text-base leading-6 font-medium text-white">
-                                ${postAuthor}
+                                ${authorName}
+                                
+
                                 <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                 ${timestamp}
+                                    ${timestamp}
+                                  </span>
+                                  <br>
+                                  <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                <a href = "mailto: abc@example.com">${authorEmail}</a> 
                                   </span>
                                    </p>
                             </div>
                           </div>
                         </a>
                     </div>
-                    <a href="/single-post.html?post_id=${post.id}" class="block focus:outline-none">
-                    <div class="pl-16">
-                    <h5 class="font-medium leading-tight text-xl mt-0 mb-2 p-4 text-white">${postTitle}</h5>
-                    
-                   
-                        </h2>
-                        <p class="text-base width-auto font-medium ml-4  text-white flex-shrink">
-                          ${postBody}
+                    </div> 
+        
+        
+                    <div class="center px-4">
+                    <a href="/single-post.html?post_id=${postID}" class="flex-shrink-0 group block">
+                        
+                          <h5 class="font-medium leading-tight text-xl mt-0 mb-2 p-4 text-white">
+                            ${postTitle}
+                            </h5>
+                            <p class="text-base width-auto font-medium ml-4  text-white flex-shrink">
+                            ${postBody}
+                            </p>
+                      </div>  
+                          
+                          
+                          <span class="text-blue-400"> ${tags}</span>
                         </p>
-                        <br>
-                        <p style="font-size: 10px;" class="width-auto font-thin ml-4 text-white flex-shrink">
-                        ${tags}
-                        </p>
-                        <!--<div class="md:flex-shrink pr-6 pt-3">
-                            <img class="rounded-lg w-full h-64" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=448&q=80" alt="Woman paying for a purchase">
-                          </div>-->
+                        
+                        
+                        <div class="md:flex-shrink w-3/5 px-6 mx-6 center">
+                            <img class="rounded-lg center " src="${postMediaString}" alt="">
+                          </div></a>
                         <div class="flex">
                             <div class="w-full">
+                            
                                 <div class="flex items-center">
                                     <div class="flex-1 text-center">
                                         <a href="#" class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
@@ -148,10 +210,256 @@ const options = {
                             </div>
                         </div>
                       </div>
-                      </a>
+                      
                       <hr class="border-gray-600">
+                      </li>
+            `
+            postContainer.insertAdjacentHTML('beforeend', newPostData);
+                        
+                        
+                        
+                        })
+                    .catch(err => console.error(err));
+                   /*
+                    
+                return (`
+                <li class="relative px-4 py-5 bg-white focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 hover:bg-gray-50">
+                    <div class="flex justify-between space-x-3">
+                        <div class="flex-1 min-w-0">
+                            <a href="/single-post.html?post_id=${post.id}" class="block focus:outline-none">
+                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                <p class="text-sm font-medium text-gray-900 truncate capitalize">${postTitle}</p>
+                            </a>
+                        </div>
+                        <time datetime="2021-01-27T16:35" class="flex-shrink-0 text-sm text-gray-400 whitespace-nowrap">${daysSinceCreated} d
+                            ago
+                        </time>
                     </div>
+                    <div class="mt-1">
+                        <p class="text-sm text-gray-400 line-clamp-2">${postBody}</p>
                     </div>
+                </li>
+            `)*/
+            })
+            //.join('');
+            // Add Posts to the page
+            //postContainer.insertAdjacentHTML('beforeend', listOfHtmlPosts);
+        }
+
+    } /*else {
+        const err = await response.json();
+        const message = `Sorry some error ${err}`;
+        throw new Error(message)
+    }*/
+})().catch(err => {
+    console.log("GET POSTS FAILED!!  😥😥😥");
+    console.log(err);
+    //postsNotificationMessage.innerHTML = err
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+let allPostData = [];
+let filteredPostData = [];
+(async function getTheID() {
+    
+        const response = await fetch(READ_POSTS_URL, {
+            method: "GET",
+            headers: {"Content-Type": "application/json","Authorization": `Bearer ${bearerKey}`}})
+
+            const posts = await response.json();
+            const listOfPosts = posts.map((post) => {
+            const postID = post.id;
+            const ALL_POST_INFO_URL = "?_author=true&_comments=true&_reactions=true" 
+                  
+                    
+            const allPostInfo = {method: 'GET',headers: {"Content-Type": "application/json","Authorization": `Bearer ${bearerKey}`}}; 
+            async function getAllPostInfo(){
+              // gets the response from the api and put it inside a constant
+              const response = await fetch(READ_POSTS_URL+"/"+`${postID}`+ALL_POST_INFO_URL, allPostInfo);
+              //the response have to be converted to json type file, so it can be used
+              const allUnfilteredPostData = await response.json();
+              //the addData adds the object "data" to an array
+              addData(allUnfilteredPostData)
+
+              function addData(something) {
+              
+                allUnfilteredPostData.push(something);
+                
+                for (let i = 0; i < allUnfilteredPostData.length; i++) {
+                  //console.log("loop",i, allPostData[i]); 
+                  const filteredPostData = allUnfilteredPostData[0];
+                  [filteredPostData].filter(item => !!item);
+                  //console.log('DETTE ER FILTERED POST DATA',filteredPostData);
+                }
+                  
+              }
+              
+                  
+                  const authorName = filteredPostData.author.name;
+                  //console.log('authorName',authorName);
+                  const authorEmail = filteredPostData.author.email;
+                  //console.log('authorEmail',authorEmail);
+      
+                  const authorAvatar = filteredPostData.author.avatar;
+                  //console.log('authorAvatar',authorAvatar);
+      
+                  const postTitle = filteredPostData.title;
+                  //console.log('postTitle',postTitle);
+                  
+                  const postBody = filteredPostData.body;
+                  //console.log('postBody',postBody);
+                  
+                  const postMediaString = filteredPostData.media;
+                  //console.log('postMediaString',postMediaString);
+                  
+                  const postReactionsArr = filteredPostData.reactions.length;
+                  //console.log('postReactionsArr',postReactionsArr);
+                  
+                  const postCommentsArr = filteredPostData.comments.length;
+                  //console.log('postCommentsArr',postCommentsArr);
+                  
+                  const postCreated = filteredPostData.created;
+                  //console.log('postCreated',postCreated);
+                  const timestamp = moment(postCreated).fromNow();
+      
+                  const postUpdated = filteredPostData.updated;
+                  //console.log('postUpdated',postUpdated);
+                  const updatedTimestamp = "Updated "+moment(postCreated).fromNow();
+                  //console.log('updatedTimestamp',updatedTimestamp);
+                  
+                  const postID = filteredPostData.id;
+                  //console.log('postID',postID);
+                  
+                  const countcomments = filteredPostData._count.comments;
+                  //console.log('countcomments',countcomments);
+                  
+                  const countreactions = filteredPostData._count.reactions;
+                  //console.log('countreactions',countreactions);
+            }
+            
+            
+            }   
+            //Calls the function that fetches the data
+        getAllPostInfo();
+            
+            
+        })();
+
+
+(async function getEveryPost() {
+    const response = await fetch(READ_POSTS_URL, {method: "GET",headers: {"Content-Type": "application/json","Authorization": `Bearer ${bearerKey}`}})
+    if (response.ok) {
+        const posts = await response.json();
+        if (!posts.length) {
+            ////postsNotificationMessage.innerHTML = "Sorry no posts currently";
+        } else {
+            const listOfPosts = posts.map((post) => {
+                
+                const postBody = post.body;
+                const postTitle = post.title;
+                const postAuthor = post.owner;
+                const postBirthday = post.created;
+                const postID = post.id;
+                  const arr = [post.tags[0]];
+                  const results = arr.filter(element => {
+                  return element !== undefined;
+                  });
+                  const unfilteredArr = [results[0]]
+                  const filteredTags = unfilteredArr.filter(element => {
+                      return element !== undefined && String.length>0;
+                      });
+                const tags = ("#"+filteredTags+" ")
+                
+                        //her får vi ufiltrert rådata
+                //console.log('her er all post data inni andre funksjon',allPostData);
+                     console.log('allpostdata',allPostData);
+                      
+                //console.log('',authorName);
+                //console.log('FILTERED POST DATA I ANDRE FUNKCJON',filteredPostData);
+                
+                
+                
+                return (
+                    `
+                    <hr class="border-gray-600">
+                    <div class="flex flex-shrink-0 p-4 pb-0">
+                    <!--<a href="/single-post.html?post_id=${postID}" class="flex-shrink-0 group block">-->
+                    
+                                <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                 
+                                  </span>
+                                  ${postBody}
+                                
                 </li>
             `
             )
@@ -164,10 +472,111 @@ const options = {
         const message = `Sorry some error ${err}`;
         throw new Error(message)
     }
-})().catch(err => {
+})()
+
+
+
+
+
+
+
+.catch(err => {
     console.log("GET POSTS FAILED!!  😥😥😥");
     console.log(err);
-   // postsNotificationMessage.innerHTML = err
+   // //postsNotificationMessage.innerHTML = err
 });
+/*
+export { postID }
+console.log(postID)
+*/
 
 
+/*
+async function getTheID() {
+    
+    const response = await fetch(READ_POSTS_URL, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${bearerKey}`
+        }
+    })
+        const posts = await response.json();
+        const listOfPosts = posts.map((post) => {
+        const postID = post.id;
+        const ALL_POST_INFO_URL = "?_author=true&_comments=true&_reactions=true" 
+                
+        const allPostInfo = {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${bearerKey}`
+      }
+    };
+        async function getAllPostInfo(){
+          // gets the response from the api and put it inside a constant
+          const response = await fetch(READ_POSTS_URL+"/"+`${postID}`+ALL_POST_INFO_URL, allPostInfo);
+          //the response have to be converted to json type file, so it can be used
+          const allPostData = await response.json();
+          //the addData adds the object "data" to an array
+          addData(allPostData)
+        }
+
+        function addData(noe) {
+          // the push method add a new item to an array
+          // here it will be adding the object from the function each time it is called
+          allPostData.push(noe);
+          //the fetched data is available only on this scope
+          //console.log("This is the value of date inside the function addData:")
+          //console.log("allPostData",allPostData)
+          for (let i = 0; i < allPostData.length; i++) {
+            //console.log("loop",i, allPostData[i]); 
+
+            const filteredPostData = allPostData[i];
+            [filteredPostData].filter(item => !!item);
+
+            const authorName = filteredPostData.author.name;
+            //console.log('authorName',authorName);
+            const authorEmail = filteredPostData.author.email;
+            //console.log('authorEmail',authorEmail);
+
+            const authorAvatar = filteredPostData.author.avatar;
+            //console.log('authorAvatar',authorAvatar);
+
+            const postTitle = filteredPostData.title;
+            //console.log('postTitle',postTitle);
+            
+            const postBody = filteredPostData.body;
+            //console.log('postBody',postBody);
+            
+            const postMediaString = filteredPostData.media;
+            //console.log('postMediaString',postMediaString);
+            
+            const postReactionsArr = filteredPostData.reactions.length;
+            //console.log('postReactionsArr',postReactionsArr);
+            
+            const postCommentsArr = filteredPostData.comments.length;
+            //console.log('postCommentsArr',postCommentsArr);
+            
+            const postCreated = filteredPostData.created;
+            //console.log('postCreated',postCreated);
+            
+            const postUpdated = filteredPostData.updated;
+            //console.log('postUpdated',postUpdated);
+            
+            const postID = filteredPostData.id;
+            //console.log('postID',postID);
+            
+            const countcomments = filteredPostData._count.comments;
+            //console.log('countcomments',countcomments);
+            
+            const countreactions = filteredPostData._count.reactions;
+            //console.log('countreactions',countreactions);
+            }
+        }   
+        //Calls the function that fetches the data
+        getAllPostInfo()
+    })};
+    getTheID();
+        //let allPostData = [];
+      */  
