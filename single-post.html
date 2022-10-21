@@ -7,11 +7,10 @@
     <script type="module" src="./js/main.js" defer></script>
     <script type="module" src="./js/local-storage-related.js" defer></script>
     <script type="module" src="./js/components/header.js" defer></script>
-    <script type="module" src="./js/components/get-posts-in-feed.js" defer></script>
-    <script type="module" src="./js/components/access-all-post-details.js" defer></script>
-    <script type="module" src="./js/make-a-post.js" defer></script>
-
-    <title>Index</title>
+    <!--<script type="module" src="./js/components/get-posts-in-feed.js" defer></script>-->
+    <!--<script type="module" src="./js/make-a-post.js" defer></script>-->
+    <script type="module" src="./js/get-post-by-id.js" defer></script>
+    <title>Post details</title>
   </head>
   <body class="bg-blue-900">
     <header>
@@ -27,7 +26,7 @@
           <!--middle wall-->
           <div class="flex">
             <div class="flex-1 m-2">
-              <h2 class="px-4 py-2 text-xl font-semibold text-white">Home</h2>
+              <h2 class="px-4 py-2 text-xl font-semibold text-white">Post details</h2>
             </div>
             <div class="flex-1 px-4 py-2 m-2">
               <a
@@ -52,51 +51,28 @@
           <!--middle creat tweet-->
           <div class="flex">
             <div class="m-2 w-10 py-1">
-              <img
-                class="inline-block h-10 w-10 rounded-full"
-                src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                alt=""
-              />
             </div>
             <div class="flex-1 px-2 pt-2 mt-2">
-              <form id="postForm" action="">
-                <textarea
-                  id="titleField"
-                  class="bg-transparent text-gray-400 font-medium text-lg w-full"
-                  rows="1"
-                  cols="50"
-                  placeholder="Title goes here"
-                ></textarea>
-                <p id="postTitleErrorMsg" class="hidden text-red-400">
-                  Title is required
-                </p>
-                <textarea
-                  id="textField"
-                  class="bg-transparent text-gray-400 font-medium text-lg w-full"
-                  rows="2"
-                  cols="50"
-                  placeholder="Random thought goes here"
-                ></textarea>
-                <p id="postBodyErrorMsg" class="hidden text-red-400">
-                  Content is required
-                </p>
-                <div class="flex">
-                  <div class="flex-1">
-                    <button
-                      id="postBtn"
-                      class="bg-blue-400 mt-2 mb-2 hover:bg-blue-600 text-white font-bold py-2 px-8 rounded-full mr-8 float-right"
-                    >
-                      Post
-                    </button>
-                  </div>
-                </div>
-              </form>
             </div>
           </div>
           <!--middle creat tweet below icons-->
           <hr class="border-blue-800 border-4" />
-          <ul><div class="px-8" id="postcontainer"></div></ul>
-          
+          <div id="singlepostcontainer">
+            <ul>
+         
+
+
+
+
+
+
+
+
+
+
+
+            </ul>
+          </div>
         </div>
         <div class="w-1/5 h-12">
           <!--right menu-->

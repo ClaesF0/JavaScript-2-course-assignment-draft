@@ -16,14 +16,10 @@ function createHeaderBar() {
     <li>
       <a href="index.html" class="${currentPage === "/index.html" ? "text-white" : ""} block py-2 p-1   bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Feed </a>
     </li>
-    <!--<li>
-      <a href="make-post.html" class="${currentPage === "/make-post.html" ? "text-white" : ""}block py-2 p-1  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"> Make new post </a>
-    </li>-->
-    <li>
-      <a href="my-posts.html" class="${currentPage === "/my-posts.html" ? "text-white" : ""}block py-2 p-1  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"> My posts </a>
+      <a href="my-posts.html" class="${currentPage === "/my-posts.html" ? "text-white" : ""}block py-2 p-1  text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"> My posts </a>
     </li>
     <li>
-      <a href="profile.html" class="${currentPage === "/profile.html" ? "text-white" : ""}block py-2 p-1  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"> ${userName}'s profile </a>
+      <a href="profile.html" class="${currentPage === "/profile.html" ? "text-white" : ""}block py-2 p-1  text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"> ${userName}'s profile </a>
     </li>     
 `;
     }

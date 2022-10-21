@@ -1,10 +1,8 @@
 import moment from "moment";
 //import { stringify } from "postcss";
-import {READ_POSTS_URL, GET_PROFILEINFO_URL} from "../api-related"
+import {READ_POSTS_URL, RETRIEVE_POST_BY_ID, GET_PROFILEINFO_URL} from "../api-related"
 import {getToken} from "../local-storage-related"
 //import {getTheID} from "../components/access-all-post-details"
-
-
 
 
 
@@ -128,7 +126,7 @@ const allPostInfoEndpoint = {
                         <a href="#" class="flex-shrink-0 group block">
                           <div class="flex items-center">
                             <div>
-                              <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="" />
+                              <img class="inline-block h-10 w-10 rounded-full" src="${authorAvatar}" alt="" />
                             </div>
                             <div class="ml-4">
                               <p class="text-base leading-6 font-medium text-white">
@@ -459,6 +457,66 @@ let filteredPostData = [];
                                  
                                   </span>
                                   ${postBody}
+                                
+                </li>
+            `
+            }
+        }   
+        //Calls the function that fetches the data
+        getAllPostInfo()
+    })};
+    getTheID();
+        let allPostData = [];
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(async function getEveryPost() {
+    const response = await fetch(READ_POSTS_URL, {method: "GET",headers: {"Content-Type": "application/json","Authorization": `Bearer ${bearerKey}`}})
+    if (response.ok) {
+        const posts = await response.json();
+        if (!posts.length) {
+            //postsNotificationMessage.innerHTML = "Sorry no posts currently";
+        } else {
+            const listOfPosts = posts.map((post) => {
+                
+                const postBody = post.body;
+                const postTitle = post.title;
+                const postAuthor = post.owner;
+                const postBirthday = post.created;
+                const postID = post.id;
+                  const arr = [post.tags[0]];
+                  const results = arr.filter(element => {
+                  return element !== undefined;
+                  });
+                  const unfilteredArr = [results[0]]
+                  const filteredTags = unfilteredArr.filter(element => {
+                      return element !== undefined && String.length>0;
+                      });
+                const tags = ("#"+filteredTags+" ")
+
+                const timestamp = moment(postBirthday).fromNow();
+                return (
+                    `
+                    <hr class="border-gray-600">
+                    <div class="flex flex-shrink-0 p-4 pb-0">
+                    <!--<a href="/single-post.html?post_id=${postID}" class="flex-shrink-0 group block">-->
+                    
+                                <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                 ${timestamp}
+                                  </span>
                                 
                 </li>
             `

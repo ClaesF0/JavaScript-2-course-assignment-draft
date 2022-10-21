@@ -139,7 +139,6 @@ signUpForm.addEventListener("submit", function(event){
 
 
     if (formValidated) {
-        console.log("Validation SUCCEEDED!!  🥳");
         const userData = {
             "name": nameField.value,
             "email": emailField.value,

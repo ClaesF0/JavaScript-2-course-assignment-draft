@@ -13,6 +13,7 @@ const passwordFieldError = document.querySelector("#passwordFieldError")
 const otherErrorField = document.querySelector("#errorMessage")
 
 
+
 // checked
 
 //only noroff adress
@@ -99,7 +100,7 @@ if (signInForm){
         correctPassword;
     
         if (formValidated) {
-            console.log("Validation SUCCEEDED!!  🥳");
+            console.log("Validation success");
             const userData = {
                 "email": emailField.value,
                 "password": passwordField.value
