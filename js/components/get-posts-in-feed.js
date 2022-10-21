@@ -3,12 +3,6 @@ import moment from "moment";
 import {READ_POSTS_URL, RETRIEVE_POST_BY_ID, GET_PROFILEINFO_URL} from "../api-related"
 import {getToken} from "../local-storage-related"
 //import {getTheID} from "../components/access-all-post-details"
-
-
-
-
-
-
 let now = moment(new Date()); //todays date
 //moment correctly installed and running
 const postContainer = document.getElementById("postcontainer");
@@ -42,15 +36,11 @@ const allPostInfoEndpoint = {
     console.log("get all posts response: ", response)
     if (response.ok) {
         const posts = await response.json();
-        //console.log(posts);
-        //console.log("GET POSTS SUCCEEDED!!  🥳 🤗🤗");
-        let now = moment(new Date()); //today's date
-        //console.log("posts: ",posts)
+        let now = moment(new Date()); 
         if (!posts.length) {
             //postsNotificationMessage.innerHTML = "Sorry no posts currently";
         } else {
             const listOfHtmlPosts = posts.map((post) => {
-                //console.log("post: ", post);
                 const postBody = post.body;
                 const postTitle = post.title;
                 const createdDate = post.created;
@@ -69,55 +59,23 @@ const allPostInfoEndpoint = {
                     })
                     .then((data) => {
                         const allPostInfo = data;
-                        //console.log('data ',data);
-                        const author = allPostInfo.author.name;
-                        //console.log("author. so close.",author)
-
                         const authorName = allPostInfo.author.name;
-                        //console.log('authorName',authorName);
                         const authorEmail = allPostInfo.author.email;
-                        //console.log('authorEmail',authorEmail);
-
                         const authorAvatar = allPostInfo.author.avatar;
-                        //console.log('authorAvatar',authorAvatar);
-
                         const postTitle = allPostInfo.title;
-                        //console.log('postTitle',postTitle);
-
                         const postBody = allPostInfo.body;
-                        //console.log('postBody',postBody);
-
                         const postMediaString = allPostInfo.media;
-                        //console.log('postMediaString',postMediaString);
-
                         //const postReactionsArr = allPostInfo.reactions.length;
                         //console.log('postReactionsArr',postReactionsArr);
-
                         const postCommentsArr = allPostInfo.comments.length;
-                        //console.log('postCommentsArr',postCommentsArr);
-
                         const postCreated = allPostInfo.created;
-                        //console.log('postCreated',postCreated);
                         const timestamp = moment(postCreated).fromNow();
-
                         const postUpdated = allPostInfo.updated;
-                        //console.log('postUpdated',postUpdated);
                         const updatedTimestamp = "Updated "+moment(postCreated).fromNow();
-                        //console.log('updatedTimestamp',updatedTimestamp);
-
                         const tags = allPostInfo.tags; 
-                        //console.log('',tags);
-                        
-
                         const postID = allPostInfo.id;
-                        //console.log('postID',postID);
-
                         const countcomments = allPostInfo._count.comments;
-                        //console.log('countcomments',countcomments);
-
                         const countreactions = allPostInfo._count.reactions;
-                        //console.log('countreactions',countreactions);
-
                         const postContainer = document.getElementById("postcontainer");
                         let newPostData = `
                         <li class="list-none">
@@ -131,8 +89,6 @@ const allPostInfoEndpoint = {
                             <div class="ml-4">
                               <p class="text-base leading-6 font-medium text-white">
                                 ${authorName}
-                                
-
                                 <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
                                     ${timestamp}
                                   </span>
@@ -146,11 +102,8 @@ const allPostInfoEndpoint = {
                         </a>
                     </div>
                     </div> 
-        
-        
                     <div class="center px-4">
                     <a href="/single-post.html?post_id=${postID}" class="flex-shrink-0 group block">
-                        
                           <h5 class="font-medium leading-tight text-xl mt-0 mb-2 p-4 text-white">
                             ${postTitle}
                             </h5>
@@ -158,53 +111,15 @@ const allPostInfoEndpoint = {
                             ${postBody}
                             </p>
                       </div>  
-                          
-                          
                           <span class="text-blue-400"> ${tags}</span>
                         </p>
-                        
-                        
                         <div class="md:flex-shrink w-3/5 px-6 mx-6 center">
                             <img class="rounded-lg center " src="${postMediaString}" alt="">
                           </div></a>
                         <div class="flex">
                             <div class="w-full">
                             
-                                <div class="flex items-center">
-                                    <div class="flex-1 text-center">
-                                        <a href="#" class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
-                                            <svg class="text-center h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                                          </a>
-                                    </div>
-        
-                                    <div class="flex-1 text-center py-2 m-2">
-                                        <a href="#" class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
-                                            <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
-                                        </a>
-                                    </div>
-        
-                                    <div class="flex-1 text-center py-2 m-2">
-                                        <a href="#" class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
-                                            <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                                        </a>
-                                    </div>
-        
-                                    <div class="flex-1 text-center py-2 m-2">
-                                        <a href="#" class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
-                                            <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                                    </a>
-                                    </div>
-                                    <div class="flex-1 text-center py-2 m-2">
-                                        <a href="#" class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
-                                            <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"></path></svg>
-                                    </a>
-                                    </div>
-                                    <div class="flex-1 text-center py-2 m-2">
-                                        <a href="#" class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
-                                            <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                                    </a>
-                                    </div>
-                                </div>
+                                <br>
                             </div>
                         </div>
                       </div>
@@ -213,46 +128,17 @@ const allPostInfoEndpoint = {
                       </li>
             `
             postContainer.insertAdjacentHTML('beforeend', newPostData);
-                        
-                        
-                        
                         })
-                    .catch(err => console.error(err));
-                   /*
-                    
-                return (`
-                <li class="relative px-4 py-5 bg-white focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 hover:bg-gray-50">
-                    <div class="flex justify-between space-x-3">
-                        <div class="flex-1 min-w-0">
-                            <a href="/single-post.html?post_id=${post.id}" class="block focus:outline-none">
-                                <span class="absolute inset-0" aria-hidden="true"></span>
-                                <p class="text-sm font-medium text-gray-900 truncate capitalize">${postTitle}</p>
-                            </a>
-                        </div>
-                        <time datetime="2021-01-27T16:35" class="flex-shrink-0 text-sm text-gray-400 whitespace-nowrap">${daysSinceCreated} d
-                            ago
-                        </time>
-                    </div>
-                    <div class="mt-1">
-                        <p class="text-sm text-gray-400 line-clamp-2">${postBody}</p>
-                    </div>
-                </li>
-            `)*/
+                    .catch(err => console.error("the following error is returned from the api call to get post details:",err));
             })
-            //.join('');
-            // Add Posts to the page
-            //postContainer.insertAdjacentHTML('beforeend', listOfHtmlPosts);
         }
-
-    } /*else {
+    } else {
         const err = await response.json();
-        const message = `Sorry some error ${err}`;
-        throw new Error(message)
-    }*/
+        alert(`Sorry the following error happened: ${err}`);
+    }
 })().catch(err => {
-    console.log("GET POSTS FAILED!!  😥😥😥");
+    alert(`Sorry the following error happened: ${err}`);
     console.log(err);
-    //postsNotificationMessage.innerHTML = err
 });
 
 

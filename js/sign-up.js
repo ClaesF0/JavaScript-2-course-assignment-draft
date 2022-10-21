@@ -161,7 +161,7 @@ signUpForm.addEventListener("submit", function(event){
 
                 if (response.ok) {
                     console.log("New user sucessfully registered");
-                    location.replace("index.html")
+                    location.replace("signin.html")
                 } else {
                     errorMessage.innerHTML = `The following error occured: ${data.message}`
                 }

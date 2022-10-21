@@ -110,10 +110,6 @@ export async function getTheID() {
     })};
     getTheID();
         
-
-
-        
-
 export function getAllPostInfo(){};
 export { authorName }
 

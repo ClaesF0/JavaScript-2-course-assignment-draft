@@ -29,9 +29,7 @@ postForm.addEventListener("submit", function (event) {
     const postFormOK = approvedTitleField && approvedTextField;
 
     if(postFormOK) {
-        console.log('wapbabelula your post looks good this far',);
-        console.log('',titleField.value);
-        console.log('',textField.value);
+        
         const postObject = {
             "title": titleField.value,
             "body": textField.value
@@ -53,14 +51,14 @@ postForm.addEventListener("submit", function (event) {
         
         if (response.ok) {
             const responseData = await response.json();
-            console.log('responseData', responseData);
+            //console.log('responseData', responseData);
             window.location.reload();
             postForm.reset();
         } else {
             const errorfromserver = "Error while communicating with server:" + await response.json();
             const errorMessage = "something went wrong";
             throw new Error(errorMessage)
-            console.log('', errorfromserver);
+            console.log('error from server when creating new post:', errorfromserver);
         }
        })().catch(errorfromserver => {
         console.log(errorfromserver)
