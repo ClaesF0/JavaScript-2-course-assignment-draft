@@ -148,7 +148,6 @@ fetch('https://nf-api.onrender.com/api/v1/social/posts', searchApiForPosts)
   .then(response => response.json())
   .then((allPostData) => {
     const people = allPostData;
-    console.log("DATA FRA ANDRE API CALL",allPostData)
     const searchInput = document.getElementById("searchInput");
     const list = document.getElementById("listTwo");
 

@@ -1,4 +1,4 @@
-console.log('LOCAL-STORAGE-RELATED.JS INIT',);
+
 
 const bearerKey = "token";
 const userKey = "user";
@@ -50,4 +50,4 @@ function clearStorage() {
 export {getToken, saveToken, storeUserSession, collectUserName, clearStorage}
 
 
-console.log('LOCAL-STORAGE-RELATED.JS SUCCESSFUL',);
+
