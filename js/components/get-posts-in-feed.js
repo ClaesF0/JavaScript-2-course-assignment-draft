@@ -33,26 +33,17 @@ const allPostInfoEndpoint = {
             "Authorization": `Bearer ${bearerKey}`
         }
     })
-    console.log("get all posts response: ", response)
     if (response.ok) {
         const posts = await response.json();
         let now = moment(new Date()); 
         if (!posts.length) {
-            //postsNotificationMessage.innerHTML = "Sorry no posts currently";
+            alert("Sorry no posts could be displayed at this time :((");
         } else {
-            const listOfHtmlPosts = posts.map((post) => {
-                const postBody = post.body;
-                const postTitle = post.title;
-                const createdDate = post.created;
+            const postsMapped = posts.map((post) => {
                 const postID = post.id;
-                const daysSinceCreated = now.diff(createdDate, 'days');
-
-                
-                
                 //console.log("individual endpoint",READ_POSTS_URL+"/"+`${postID}`+ALL_POST_INFO_URL, allPostInfoEndpoint);
 
                   fetch(READ_POSTS_URL+"/"+`${postID}`+ALL_POST_INFO_URL, allPostInfoEndpoint)
-                
                   
                   .then((response) => {
                         return response.json();

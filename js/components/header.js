@@ -1,5 +1,13 @@
 import { collectUserName } from "../local-storage-related";
 import {clearStorage} from "../local-storage-related"
+import {getToken} from "../local-storage-related"
+//import {getTheID} from "../components/access-all-post-details"
+
+const bearerKey = getToken();
+
+
+
+
 
 function createHeaderBar() {
   const { currentPage } = document.location;
@@ -40,8 +48,9 @@ function createHeaderBar() {
                     <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
                   </svg>
                 </button>
-              <input type="search" name="search" placeholder="Search" class="bg-blue-800 h-10 px-10 pr-5 w-full rounded-full text-sm focus:outline-none bg-purple-white shadow rounded border-0">
-              
+              <input type="search" name="search" id="searchInput" placeholder="Search" class="bg-blue-800 h-10 px-10 pr-5 w-full rounded-full text-sm focus:outline-none bg-purple-white shadow rounded border-0">
+              <ul class"list-group" id="list"></ul>
+              <ul class"list-group" id="listTwo"></ul>
           </div>
           
         <button type="button" id="logout-btn" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Log Out</button>
@@ -62,12 +71,244 @@ if (logoutbtn) {
 }
 
 
+//Search starts here
+
+const searchApiForProfiles = {
+  method: 'GET',
+  headers: {
+    Authorization: `Bearer ${bearerKey}`
+  }
+};
+
+fetch('https://nf-api.onrender.com/api/v1/social/profiles', searchApiForProfiles)
+  .then(response => response.json())
+  .then((data) => {
+    const people = data;
+
+    const searchInput = document.getElementById("searchInput");
+    const list = document.getElementById("list");
+
+function setList(group){
+  clearList();
+  for(const person of group){
+    const item=document.createElement('li')
+    item.classList.add('list-group-item')
+    //const linkToProfile = `<a href="/profile.html/${person.name}">Profile:${person.name}</a>`;
+    const text = document.createTextNode("Profile: "+person.name);
+    
+    item.appendChild(text);
+    list.appendChild(item);
+  }
+    if (group.length === 0){
+      setNoResults();
+ 
+  }
 }
 
+function clearList(){
+    while (list.firstChild){
+      list.removeChild(list.firstChild);
+    }
+}
+
+function setNoResults () {
+    const item=document.createElement('li')
+    item.classList.add('list-group-item')
+    const text = document.createTextNode("No results found");
+    item.appendChild(text);
+    list.appendChild(item);
+}
+
+function getRelevancy(value, searchTerm){ //maximizing relevancy with origin of amount of search/result match
+  if (value === searchTerm) {
+    return 2;
+  } else if (value.startsWith(searchTerm)) {
+    return 1;
+  } else if(value.includes(searchTerm)) {
+    return 0;
+  }
+}
+
+searchInput.addEventListener('input', (event) => {
+  //console.log(event.target.value)
+  let value = event.target.value;
+  if (value && value.trim().length > 0) {
+      value = value.trim().toLowerCase(); //avoid cAsE sEnsItIvIty IsSueS
+      setList(people.filter(person=>{
+        return person.name.includes(value);
+      }).sort((personA, personB)=>{
+        return getRelevancy(personB.name, value) -getRelevancy(personA.name, value);
+      })); //her er array som søkes i 
+  } else {
+    clearList();
+  }
+});
+//Search ends here
+  }
+  )
+  .catch(err => console.error(err));
+
+////////NESTE CALL BEGYNNER/////////
+
+
+const searchApiForPosts = {
+  method: 'GET',
+  headers: {
+    Authorization: `Bearer ${bearerKey}`
+  }
+};
+
+fetch('https://nf-api.onrender.com/api/v1/social/posts', searchApiForPosts)
+  .then(response => response.json())
+  .then((allPostData) => {
+    const people = allPostData;
+    console.log("DATA FRA ANDRE API CALL",allPostData)
+
+    const searchInput = document.getElementById("searchInput");
+    const list = document.getElementById("listTwo");
+
+function setList(group){
+  clearList();
+  for(const person of group){
+    console.log('GROUP',group);
+    
+    const item=document.createElement('li')
+    item.classList.add('list-group-item')
+    //const linkToProfile = `<a href="/profile.html/${person.name}">Profile:${person.name}</a>`;
+    const title = document.createTextNode("SAC Title: "+person.title);
+    const text = document.createTextNode("SAC body: "+person.body);
+    item.appendChild(title);
+    item.appendChild(text);
+    list.appendChild(item);
+  }
+    if (group.length === 0){
+      setNoResults();
+ 
+  }
+}
+
+function clearList(){
+    while (list.firstChild){
+      list.removeChild(list.firstChild);
+    }
+}
+
+function setNoResults () {
+    const item=document.createElement('li')
+    item.classList.add('list-group-item')
+    const text = document.createTextNode("No results found");
+    item.appendChild(text);
+    list.appendChild(item);
+}
+
+function getRelevancy(value, searchTerm){ //maximizing relevancy with origin of amount of search/result match
+  if (value === searchTerm) {
+    return 2;
+  } else if (value.startsWith(searchTerm)) {
+    return 1;
+  } else if(value.includes(searchTerm)) {
+    return 0;
+  }
+}
+
+searchInput.addEventListener('input', (event) => {
+  //console.log(event.target.value)
+  let value = event.target.value;
+  if (value && value.trim().length > 0) {
+      value = value.trim().toLowerCase(); //avoid cAsE sEnsItIvIty IsSueS
+      setList(people.filter(person=>{
+        return person.title.includes(value);
+      }).sort((personA, personB)=>{
+        return getRelevancy(personB.title, value) -getRelevancy(personA.title, value);
+      })); //her er array som søkes i 
+  } else {
+    clearList();
+  }
+});
+//Search ends here
+  }
+  )
+  .catch(err => console.error(err));
+
+
+/////////NESTE CALL SLUTTER/////////
+
+
+/*const people = [
+  {name: 'david'},
+  {name: 'patel'},
+  {name: 'kevin'},
+  {name: 'steven'},
+  {name: 'coco'},
+  {name: 'brock'},
+  {name: 'rock'},
+];*/
+          /*const DUMÅFINNEENMÅTEÅSØKEGJENNOMALT*/
+          //for eksempel av man bytter ut const people med array av alle brukere, og så brukere.author.name
 
 
 
+//const searchInput = document.getElementById("searchInput");
+//const list = document.getElementById("list");
+//
+//function setList(group){
+//  clearList();
+//  for(const person of group){
+//    const item=document.createElement('li')
+//    item.classList.add('list-group-item')
+//    const text = document.createTextNode(person.name);
+//    item.appendChild(text);
+//    list.appendChild(item);
+//  }
+//    if (group.length === 0){
+//      setNoResults();
+// 
+//  }
+//}
+//
+//function clearList(){
+//    while (list.firstChild){
+//      list.removeChild(list.firstChild);
+//    }
+//}
+//
+//function setNoResults () {
+//    const item=document.createElement('li')
+//    item.classList.add('list-group-item')
+//    const text = document.createTextNode("No results found");
+//    item.appendChild(text);
+//    list.appendChild(item);
+//}
+//
+//function getRelevancy(value, searchTerm){ //maximizing relevancy with origin of amount of search/result match
+//  if (value === searchTerm) {
+//    return 2;
+//  } else if (value.startsWith(searchTerm)) {
+//    return 1;
+//  } else if(value.includes(searchTerm)) {
+//    return 0;
+//  }
+//}
+//
+//searchInput.addEventListener('input', (event) => {
+//  //console.log(event.target.value)
+//  let value = event.target.value;
+//  if (value && value.trim().length > 0) {
+//      value = value.trim().toLowerCase(); //avoid cAsE sEnsItIvIty IsSueS
+//      setList(people.filter(person=>{
+//        return person.name.includes(value);
+//      }).sort((personA, personB)=>{
+//        return getRelevancy(personB.name, value) -getRelevancy(personA.name, value);
+//      })); //her er array som søkes i 
+//  } else {
+//    clearList();
+//  }
+//});
+////Search ends here
+//
+//
 
+}
 
 createHeaderBar();
 
