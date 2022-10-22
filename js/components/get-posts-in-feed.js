@@ -7,9 +7,6 @@ let now = moment(new Date()); //todays date
 //moment correctly installed and running
 const postContainer = document.getElementById("postcontainer");
 
-
-
-
 const bearerKey = getToken();
 if(!bearerKey){
     location.replace("signin.html")
@@ -109,18 +106,16 @@ const allPostInfoEndpoint = {
                           </div></a>
                         <div class="flex">
                             <div class="w-full">
-                            
                                 <br>
                             </div>
                         </div>
                       </div>
-                      
                       <hr class="border-gray-600">
                       </li>
             `
             postContainer.insertAdjacentHTML('beforeend', newPostData);
                         })
-                    .catch(err => console.error("the following error is returned from the api call to get post details:",err));
+                .catch(err => console.error("the following error is returned from the api call to get post details:",err));
             })
         }
     } else {

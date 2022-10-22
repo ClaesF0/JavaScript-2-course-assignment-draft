@@ -89,7 +89,6 @@ console.log('get users own posts',GET_USERS_OWN_POSTS_URL);
                                           <button id="editFormBtn" onclick="showEditField" class=" text-white bg-lime-200  py-2 px-4 border hover:border-transparent rounded">
                                       Edit or delete post
                                     </button></a>
-                                    
                                     </div>
                                     </section>
                                     <hr class="border-gray-600">
@@ -102,8 +101,6 @@ console.log('get users own posts',GET_USERS_OWN_POSTS_URL);
                         </div>
                       </div> 
                       <hr class="border-gray-600">
-                      
-                      
                 </div>
                 </form>
               </div>   

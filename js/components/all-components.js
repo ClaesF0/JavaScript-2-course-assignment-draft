@@ -1,6 +1,3 @@
-//import "../style.css";
-//import { clearStorage } from "../local-storage-related";
-
-//import {createHeaderBar} from "./header";
-
-//createHeaderBar();
+/*
+Code moved, file kept for sake of minimizing the risk of pages stopping due to lack of filepath
+*/
