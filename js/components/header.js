@@ -3,6 +3,9 @@ import {clearStorage} from "../local-storage-related"
 import {getToken} from "../local-storage-related"
 
 const bearerKey = getToken();
+if(!bearerKey){
+  location.replace("signin.html")
+}
 
 function createHeaderBar() {
   const { currentPage } = document.location;
