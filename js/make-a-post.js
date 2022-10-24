@@ -34,7 +34,7 @@ postForm.addEventListener("submit", function (event) {
             "title": titleField.value,
             "body": textField.value
         };
-        const bearerToken = getToken();
+        const bearerKey = getToken();
         
         
         
@@ -43,7 +43,7 @@ postForm.addEventListener("submit", function (event) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${bearerToken}`
+                "Authorization": `Bearer ${bearerKey}`
             },
             body: JSON.stringify(postObject)
             

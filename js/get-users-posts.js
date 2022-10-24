@@ -1,7 +1,6 @@
 import moment from "moment";
 import {
   GET_USERS_OWN_POSTS_URL,
-  DELETE_USER_POST_BY_ID,
 } from "../js/api-related";
 import { collectUserName, getToken } from "../js/local-storage-related";
 
@@ -33,11 +32,11 @@ console.log('get users own posts',GET_USERS_OWN_POSTS_URL);
     postContainer.innerHTML = "";
     const { posts } = postsJson;
     if (!posts.length) {
-      errorContainer.innerHTML = "You have no posts";
+      alert("You have no posts");
     } else {
       const amountOfPosts = posts.length;
       for (let i = 0; i < amountOfPosts; i++) {
-        console.log(posts[i]);
+        //console.log(posts[i]);
       }
       const listOfPosts = posts
         .map((post) => {
@@ -45,11 +44,11 @@ console.log('get users own posts',GET_USERS_OWN_POSTS_URL);
           const postTitle = post.title;
           const postBirthday = post.created;
           const postID = post.id;
-          console.log('POST ID POST ID ',postID);
+          //console.log('POST ID POST ID ',postID);
           
           
           const timestamp = moment(postBirthday).fromNow();
-          console.log(postsJson)
+          //console.log(postsJson)
           return `
           <hr class="border-gray-600">
                     <div class="flex flex-shrink-0 p-4 pb-0">

@@ -120,7 +120,8 @@ const allPostInfoEndpoint = {
         }
     } else {
         const err = await response.json();
-        alert(`Sorry the following error happened: ${err}`);
+        alert(`Sorry the following error happened: ${err}`,err);
+        console.log(err)
     }
 })().catch(err => {
     alert(`Sorry the following error happened: ${err}`);

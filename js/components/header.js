@@ -75,24 +75,25 @@ fetch('https://nf-api.onrender.com/api/v1/social/profiles', searchApiForProfiles
   .then(response => response.json())
   .then((data) => {
     const people = data;
+    //console.log('HERE IS THE RAW DATA RECEIVED',data);
+    
 
     const searchInput = document.getElementById("searchInput");
     const list = document.getElementById("list");
-
+    
+    
 function setList(group){
   clearList();
   for(const person of group){
     const item=document.createElement('li')
+    //console.dir("ITEM",item)
     item.classList.add('list-group-item')
-    //const linkToProfile = `<a href="/profile.html/${person.name}">Profile:${person.name}</a>`;
-    const text = document.createTextNode("Username: "+person.name);
-    
+    const text = document.createTextNode("username: "+person.name);
     item.appendChild(text);
     list.appendChild(item);
   }
     if (group.length === 0){
       setNoResults();
- 
   }
 }
 
@@ -103,6 +104,7 @@ function clearList(){
 }
 
 function setNoResults () {
+  
     const item=document.createElement('li')
     item.classList.add('list-group-item')
     const text = document.createTextNode("No matching user found");
