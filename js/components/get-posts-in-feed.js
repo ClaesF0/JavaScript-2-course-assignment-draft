@@ -12,6 +12,12 @@ if(!bearerKey){
     location.replace("signin.html")
 }
 
+(function redirectInvalid() {
+    if(!bearerKey){
+      location.replace("signin.html")
+    }
+  })();
+
 const ALL_POST_INFO_URL = "?_author=true&_comments=true&_reactions=true" 
 const allPostInfo = {method: 'GET',headers: {"Content-Type": "application/json","Authorization": `Bearer ${bearerKey}`}}; 
 

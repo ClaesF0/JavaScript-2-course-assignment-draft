@@ -3,6 +3,13 @@ import {clearStorage} from "../local-storage-related"
 import {getToken} from "../local-storage-related"
 
 const bearerKey = getToken();
+
+(function redirectInvalid() {
+  if(!bearerKey){
+    location.replace("signin.html")
+  }
+})();
+
 if(!bearerKey){
   location.replace("signin.html")
 }
