@@ -6,12 +6,12 @@ const bearerKey = getToken();
 
 (function redirectInvalid() {
   if(!bearerKey){
-    location.replace("signin.html")
+    location.replace("/signin.html")
   }
 })();
 
 if(!bearerKey){
-  location.replace("signin.html")
+  location.replace("/signin.html")
 }
 
 function createHeaderBar() {
