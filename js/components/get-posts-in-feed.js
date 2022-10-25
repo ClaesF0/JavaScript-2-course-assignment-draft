@@ -39,6 +39,9 @@ const allPostInfoEndpoint = {
     if (response.ok) {
         const posts = await response.json();
         let now = moment(new Date()); 
+        if(!bearerKey){
+          location.replace("signin.html")
+      }
         if (!posts.length) {
             alert("Sorry no posts could be displayed at this time :((");
         } else {
