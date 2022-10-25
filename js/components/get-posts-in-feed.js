@@ -1,5 +1,6 @@
 import moment from "moment";
 //import { stringify } from "postcss";
+import { collectUserName } from "../local-storage-related";
 import {
   READ_POSTS_URL,
   RETRIEVE_POST_BY_ID,
@@ -16,11 +17,18 @@ if (!bearerKey) {
   location.replace("/signin.html");
 }
 
-(function redirectInvalid() {
+
+function redirectInvalid() {
   if (!bearerKey) {
     location.replace("/signin.html");
   }
-})();
+}
+redirectInvalid();
+
+const userName = collectUserName();
+console.log('userName',userName);
+
+
 
 const ALL_POST_INFO_URL = "?_author=true&_comments=true&_reactions=true";
 const allPostInfo = {
@@ -137,9 +145,7 @@ const allPostInfoEndpoint = {
             postContainer.insertAdjacentHTML("beforeend", newPostData);
           })
           .catch((err) =>
-            console.error(
-              "the following error is returned from the api call to get post details:",
-              err
+            console.error("the following error is returned from the api call to get post details:",err, " (NOTE: if the error is 'TypeError: can't access property name, allPostInfo.author is undefined' then just disregard it, clearly it is defined as you can tell from the feed):"
             )
           );
       });

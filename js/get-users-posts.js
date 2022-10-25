@@ -45,8 +45,6 @@ console.log('get users own posts',GET_USERS_OWN_POSTS_URL);
           const postBirthday = post.created;
           const postID = post.id;
           //console.log('POST ID POST ID ',postID);
-          
-          
           const timestamp = moment(postBirthday).fromNow();
           //console.log(postsJson)
           return `
@@ -112,16 +110,12 @@ console.log('get users own posts',GET_USERS_OWN_POSTS_URL);
       // Add Posts to the page
       postContainer.insertAdjacentHTML("beforeend", listOfPosts);
     }
-    
-
-
   } else {
     const err = await response.json();
     const message = `Sorry some error ${err}`;
     throw new Error(message);
   }
 })().catch((err) => {
-  console.log("GET POSTS FAILED!!  😥😥😥");
   console.log(err);
   // postsNotificationMessage.innerHTML = err
 });

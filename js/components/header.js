@@ -4,11 +4,14 @@ import {getToken} from "../local-storage-related"
 
 const bearerKey = getToken();
 
-(function redirectInvalid() {
+function redirectInvalid() {
   if(!bearerKey){
     location.replace("/signin.html")
   }
-})();
+}
+redirectInvalid();
+
+
 
 if(!bearerKey){
   location.replace("/signin.html")
@@ -19,6 +22,9 @@ function createHeaderBar() {
   const navBar = document.getElementById("navBar");
   if (navBar) {
     const userName = collectUserName();
+    if(!userName){
+      location.replace("/signin.html")
+    }
     let links;
     links = `
             <li class="p-8"><a href="/signup.html" class="${currentPage === "/signup.html" ? "text-white" : ""}">SignUp</a></li>
