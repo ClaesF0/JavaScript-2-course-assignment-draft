@@ -1,5 +1,3 @@
-
-
 const bearerKey = "token";
 const userKey = "user";
 
@@ -8,7 +6,6 @@ function saveToken (token) {
     console.log("bearerKey: ", bearerKey)
     saveToStorage(bearerKey, token);
 }
-
 
 function getToken() {
     return getFromStorage(bearerKey);
