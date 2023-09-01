@@ -1,13 +1,16 @@
-_Trello-board:_  https://trello.com/b/Fs9Fdirg/js2-ca
+### Executive summary: 
+This project requires implementing front-end functionality for a social media application using JavaScript techniques and a provided API. The application must allow for viewing, posting, editing, and deleting social media content. Required features include registration, login, content filtering and search, and post creation, updating, and deletion. Optional features include commenting, media editing, following/unfollowing, and post reactions. Teamwork is allowed, and development should include regular commits and branches. Feedback will be given through peer review and a teacher review. The use of a CSS framework is allowed, but original, pure JavaScript must be used for required functionality.
+
+## _Trello-board:_  https://trello.com/b/Fs9Fdirg/js2-ca
 
 /*/*/*/Feedback goes here:*/*/*/
 
 
 
 
-*/*/*/ NOTES TO ME */*/*/
+## Brief in full:
 
-Goal
+# Goal
 
 To apply knowledge of JavaScript techniques to implement the front-end functionality for a social media application.
 API
@@ -28,7 +31,7 @@ Using localStorage is highly recommended, especially for storing JWT tokens.
 A finished project fulfils the requirements below with an easy to use and error-free user interface.
 Required features
 
-The following user stories are required for a passing submission:
+# The following user stories are required for a passing submission:
 
     User with @noroff.no or @stud.noroff.no email can register profile
     - [x] Registered user can login
@@ -41,9 +44,9 @@ The following user stories are required for a passing submission:
     User can update a post content item
     User can delete a post content item
 
-Additional features
+# Additional features
 
-The following user stories are optional:
+# The following user stories are optional:
 
     User can create a comment on a post
     User can edit profile media
