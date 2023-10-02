@@ -54,55 +54,54 @@ console.log("get users own posts", GET_PROFILES_POSTS_URL);
           //console.log(postsJson)
           return `
           <hr class="border-gray-600">
-                    <div class="flex flex-shrink-0 p-4 pb-0">
-                                <span class="absolute inset-0" aria-hidden="true"></span>
-                        <a href="#" class="flex-shrink-0 group block">
-                          <div class="flex items-center">
-                            <div>
-                              <img class="inline-block h-10 w-10 px-3 rounded-full" src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="" />
-                            </div>
-                            <div class="ml-3">
-                              <p class="text-base px-3 ml-3 leading-6 font-medium text-white">
-                                ${profileName} 
-                                <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                    ${timestamp}
-                                  </span>
-                                   </p>
-                            </div>
-                          </div>
-                        </a>
-                    </div>
-                    <a href="/single-post.html?post_id=${postID}" class="block focus:outline-none">
-                    <div class="pl-16">
-                    <h5 class="font-medium leading-tight text-xl mt-0 mb-2 p-4 text-white">${postTitle}</h5>
-                     </h2>
-                        <p class="text-base width-auto font-medium ml-4  text-white flex-shrink">
-                          ${postBody}
-                        </p></a>
-                        <!--<div class="md:flex-shrink pr-6 pt-3">
-                            <img class="rounded-lg w-full h-64" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=448&q=80" alt="Woman paying for a purchase">
-                          </div>-->
-                        <div class="flex">
-                            <div class="w-full">
-                            <br>
-                                <div class="flex items-center">
-
-                                    <hr class="border-gray-600">
-                                    <!--middle creat tweet-->
-                                    <div class="flex">                  
-                                    </div>
-                                        </div>    
-                                </div>
-                            </div>
-                        </div>
-                      </div> 
-                      <hr class="border-gray-600">
+          <div class="flex flex-shrink-0 p-4 pb-0">
+            <span class="absolute inset-0" aria-hidden="true"></span>
+            <div class="flex items-center">
+              <div>
+                <img class="inline-block h-10 w-10 px-3 rounded-full" src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="" />
+              </div>
+              {" "}
+              <div class="ml-3">
+                <p class="text-base px-3 ml-3 leading-6 font-medium text-white">
+                  ${profileName} 
+                  <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                    ${timestamp}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <a href="/single-post.html?post_id=${postID}" class="block focus:outline-none">
+            <div class="pl-16">
+              <h5 class="font-medium leading-tight text-xl mt-0 mb-2 p-4 text-white">${postTitle}</h5>
+              </h2>
+              <p class="text-base width-auto font-medium ml-4  text-white flex-shrink">
+                ${postBody}
+              </p>
+            </div>
+          </a>
+          <!--<div class="md:flex-shrink pr-6 pt-3">
+            <img class="rounded-lg w-full h-64" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=448&q=80" alt="Woman paying for a purchase">
+          </div>-->
+          <div class="flex">
+            <div class="w-full">
+              <br>
+              <div class="flex items-center">
+                <hr class="border-gray-600">
+                <!--middle creat tweet-->
+                <div class="flex">                  
                 </div>
-                </form>
-              </div>   
-                    </div>
-                    </div>
-                </li>
+              </div>
+            </div>
+          </div>
+          </div> 
+          <hr class="border-gray-600">
+          </div>
+          </form>
+          </div>   
+          </div>
+          </li>
+          
             `;
         })
         .join("");

@@ -105,56 +105,7 @@ const allPostInfoEndpoint = {
         const countcomments = allPostInfo._count.comments;
         const countreactions = allPostInfo._count.reactions;
         const postContainer = document.getElementById("postcontainer");
-        /*
-            let newPostData = `
-                        <li class="list-none">
-                        <hr class="border-gray-600">
-                        <div class="flex flex-shrink-0 p-4 pb-0">
-                        <a href="#" class="flex-shrink-0 group block">
-                          <div class="flex items-center">
-                            <div>
-                              <img class="inline-block h-10 w-10 rounded-full" src="${authorAvatar}" alt="" />
-                            </div>
-                            <div class="ml-4">
-                              <p class="text-base leading-6 font-medium text-white">
-                                ${authorName}
-                                <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                    ${timestamp}
-                                  </span>
-                                  <br>
-                                  <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                <a href = "mailto: abc@example.com">${authorEmail}</a> 
-                                  </span>
-                                   </p>
-                            </div>
-                          </div>
-                        </a>
-                    </div>
-                    </div> 
-                    <div class="center px-4">
-                    <a href="/single-post.html?post_id=${postID}" class="flex-shrink-0 group block">
-                          <h5 class="font-medium leading-tight text-xl mt-0 mb-2 p-4 text-white">
-                            ${postTitle}
-                            </h5>
-                            <p class="text-base width-auto font-medium ml-4  text-white flex-shrink">
-                            ${postBody}
-                            </p>
-                      </div>  
-                          <span class="text-blue-400"> ${tags}</span>
-                        </p>
-                        <div class="md:flex-shrink w-3/5 px-6 mx-6 center">
-                            <img class="rounded-lg center " src="${postMediaString}" alt="">
-                          </div></a>
-                        <div class="flex">
-                            <div class="w-full">
-                                <br>
-                            </div>
-                        </div>
-                      </div>
-                      <hr class="border-gray-600">
-                      </li>
-            `;
-            */
+
         let newPostData = `
   <li class="list-none">
     <hr class="border-gray-600">
@@ -163,7 +114,12 @@ const allPostInfoEndpoint = {
         <div class="flex items-center">
           <div>
           <a href="/profile.html?profile_name=${authorName}" class="text-base leading-6 font-medium text-white">
-            <img class="inline-block h-10 w-10 rounded-full" src="${authorAvatar}" alt="Author Avatar" />
+          ${
+            authorAvatar && isImageURL(authorAvatar)
+              ? `<img class="inline-block h-10 w-10 rounded-full" src="${authorAvatar}" alt="${authorAvatar}'s image" />`
+              : `<img class="inline-block h-10 w-10 rounded-full" src="https://i.pinimg.com/736x/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.jpg" alt="no image of author" />`
+          }
+
           </div>
           <div class="ml-4">
             <p class="leading-6 font-lg text-white">
@@ -190,7 +146,7 @@ const allPostInfoEndpoint = {
         </p>
         ${
           postMediaString && isImageURL(postMediaString)
-            ? `<img class="rounded-lg mt-4" src="${postMediaString}" alt="Post Media" />`
+            ? `<img class="rounded-lg mt-4" src="${postMediaString}" alt="Post Media is ${postMediaString}" />`
             : ""
         }
       </div>  
@@ -217,9 +173,9 @@ const allPostInfoEndpoint = {
   }
 })();
 
-// Function to check if a given string is a valid image URL
 function isImageURL(url) {
-  // Regular expression to check if the URL ends with an image file extension
-  const imageRegex = /\.(jpeg|jpg|gif|png|bmp|svg)$/i;
+  // Regular expression to check if the URL ends with a valid image file extension
+  const imageRegex =
+    /\.(jpeg|jpg|gif|png|bmp|svg|webp|ico|tiff|jfif|pjpeg|pjp)$/i;
   return imageRegex.test(url);
 }
