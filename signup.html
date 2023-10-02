@@ -7,8 +7,16 @@
     <script type="module" src="./js/main.js" defer></script>
     <script type="module" src="./js/sign-up.js" defer></script>
   </head>
-  <body>
-    <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+  <body class="bg-blue-500 md:flex justify-center items-center min-h-screen">
+    <div class="md:block md:w-1/2 p-4">
+      <h1 class="text-4xl font-bold text-white mb-4">Piece of Mind</h1>
+      <p class="text-lg text-gray-300">
+        Give friends and the world around you a Piece of Mind. Share your
+        thoughts, experiences, and stay connected.
+      </p>
+      <p>Please sign up using any @noroff.no address</p>
+    </div>
+    <div class="w-full md:w-1/2 max-w-lg mx-auto p-4">
       <div class="max-w-lg mx-auto">
         <h1
           class="text-2xl font-bold text-center text-indigo-600 sm:text-3xl"
@@ -17,12 +25,12 @@
         <form
           id="signup-form"
           action=""
-          class="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl"
+          class="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl bg-gray-50"
         >
           <p class="text-lg text-center font-medium">Create new account</p>
           <p id="errorMessage" class="text-lg font-medium text-red-600"></p>
           <div>
-            <label for="name" class="text-sm font-medium ">Name</label>
+            <label for="name" class="text-sm font-medium">Name</label>
             <div class="relative mt-1">
               <input
                 type=""
@@ -33,9 +41,9 @@
               <span class="absolute inset-y-0 inline-flex items-center right-4">
               </span>
               <span
-                    id="nameFieldError"
-                    class="hidden text-sm ml-4 text-red-600"
-            >
+                id="nameFieldError"
+                class="hidden text-sm ml-4 text-red-600"
+              >
                 Enter a name
               </span>
             </div>
@@ -46,7 +54,7 @@
               <input
                 type="email"
                 id="emailField"
-                class="w-full p-4 pr-12 text-sm border-2 border-gray-400 rounded-lg shadow-sm "
+                class="w-full p-4 pr-12 text-sm border-2 border-gray-400 rounded-lg shadow-sm"
                 placeholder="Enter email (required)"
               />
               <span class="absolute inset-y-0 inline-flex items-center right-4">
@@ -65,16 +73,19 @@
                   />
                 </svg>
               </span>
+
               <span
-                    id="emailFieldError"
-                    class="hidden text-sm ml-4 text-red-600"
-            >
-                An email address is required</span>
+                id="emailFieldError"
+                class="hidden text-sm ml-4 text-red-600"
+              >
+                An email address is required</span
+              >
               <span
-                    id="emailInvalidError"
-                    class="hidden text-sm ml-4 text-red-600"
-            >
-                Enter a valid noroff.no or stud.noroff.no mail adress</span>
+                id="emailInvalidError"
+                class="hidden text-sm ml-4 text-red-600"
+              >
+                Enter a valid noroff.no or stud.noroff.no mail adress</span
+              >
             </div>
           </div>
           <div>
@@ -110,10 +121,10 @@
                 </svg>
               </span>
               <span
-                    id="passwordFieldError"
-                    class="hidden text-sm ml-4 text-red-600"
-            >
-                </span>
+                id="passwordFieldError"
+                class="hidden text-sm ml-4 text-red-600"
+              >
+              </span>
             </div>
             <div class="relative mt-1">
               <input
@@ -145,17 +156,16 @@
                 </svg>
               </span>
               <span
-                    id="passwordConfirmFieldError"
-                    class="hidden text-sm ml-4 text-red-600"
-            >
-                Passwords are not matching, try again. </span>
+                id="passwordConfirmFieldError"
+                class="hidden text-sm ml-4 text-red-600"
+              >
+                Passwords are not matching, try again.
+              </span>
             </div>
           </div>
-          <span
-                    id="capsLockReminder"
-                    class="hidden text-sm ml-4 text-red-600"
-            >
-                CAPS LOCK IS ON </span>
+          <span id="capsLockReminder" class="hidden text-sm ml-4 text-red-600">
+            CAPS LOCK IS ON
+          </span>
           <button
             type="submit"
             class="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
