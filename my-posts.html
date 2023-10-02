@@ -1,73 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="./js/main.js" defer></script>
     <script type="module" src="./js/local-storage-related.js" defer></script>
     <script type="module" src="./js/components/header.js" defer></script>
     <!--<script type="module" src="./js/components/get-posts-in-feed.js" defer></script>-->
     <script type="module" src="./js/get-users-posts.js" defer></script>
-<!--<script type="module" src="./js/make-a-post.js" defer></script>-->
-    
+    <!--<script type="module" src="./js/make-a-post.js" defer></script>-->
+
     <script type="module" src="./js/edit-a-post.js" defer></script>
 
     <title>My posts</title>
-</head>
-<body>
-<header>
-    <div id="navBar" class="w-3/5" style="margin-bottom: 4rem;"></div>
-</header>  
-    
+  </head>
+  <body>
+    <header>
+      <div id="navBar" class="w-3/5" style="margin-bottom: 4rem"></div>
+    </header>
 
-
-
-<div class="bg-blue-900">
-    
-  <div class="flex">
-
-      <div class="w-1/5 text-white h-12 pl-32 py-4">
+    <div class="bg-blue-900">
+      <div class="flex">
+        <div class="w-1/5 text-white h-12 pl-32 py-4">
           <!--left menu-->
- </div>
+        </div>
 
-      <div class="w-3/5 border border-gray-600 h-auto border-t-0">
+        <div class="w-3/5 border border-gray-600 h-auto border-t-0">
           <!--middle wall-->
-       
+
           <div class="flex">
-              <div class="flex-1 m-2">
-                  <h2 class="px-4 py-2 text-xl font-semibold text-white">My post history</h2>
-              </div>
-              <h2 id="errorContainer" class="px-4 py-2 text-xl font-semibold text-red-700"></h2>
-              <div class="flex-1 px-4 py-2 m-2">
-                  
-              </div>
+            <div class="flex-1 m-2">
+              <h2 class="px-4 py-2 text-xl font-semibold text-white">
+                My post history
+              </h2>
+            </div>
+            <h2
+              id="errorContainer"
+              class="px-4 py-2 text-xl font-semibold text-red-700"
+            ></h2>
+            <div class="flex-1 px-4 py-2 m-2"></div>
           </div>
 
-          
-          <hr class="border-blue-800 border-4">
-<div id="postcontainer"></div>
-  </div>
-      <div class="w-1/5 h-12">
+          <hr class="border-blue-800 border-4" />
+          <div id="postcontainer"></div>
+        </div>
+        <div class="w-1/5 h-12">
           <!--right menu-->
           <!--third-people suggetion to follow section-->
-          <div class="max-w-sm rounded-lg bg-blue-800 overflow-hidden shadow-lg m-4 mr-20">
-              <div class="flex">
-              </div>
-              <!--show more-->
+          <div
+            class="max-w-sm rounded-lg bg-blue-800 overflow-hidden shadow-lg m-4 mr-20"
+          >
+            <div class="flex"></div>
+            <!--show more-->
           </div>
-      <div class="m-6 inline">
-          <div class="flex-1">
+          <div class="m-6 inline">
+            <div class="flex-1">
               <a href="#">
-              <p class="text-sm leading-6 font-medium text-gray-500">Get a life.</p>
+                <p class="text-sm leading-6 font-medium text-gray-500">
+                  Get a life.
+                </p>
               </a>
+            </div>
+            <div class="flex-2">
+              <p class="text-sm leading-6 font-medium text-gray-600">
+                © 2022 Claes.
+              </p>
+            </div>
           </div>
-          <div class="flex-2">
-              <p class="text-sm leading-6 font-medium text-gray-600"> © 2022 Claes.</p>
-          </div>
-          </div>
-  </div>
-</div>
-</div>
-</body>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

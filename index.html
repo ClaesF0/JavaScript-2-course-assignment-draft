@@ -7,43 +7,47 @@
     <script type="module" src="./js/main.js" defer></script>
     <script type="module" src="./js/local-storage-related.js" defer></script>
     <script type="module" src="./js/components/header.js" defer></script>
-    <script type="module" src="./js/components/get-posts-in-feed.js" defer></script>
-    <script type="module" src="./js/components/access-all-post-details.js" defer></script>
+    <script
+      type="module"
+      src="./js/components/get-posts-in-feed.js"
+      defer
+    ></script>
+    <script
+      type="module"
+      src="./js/components/access-all-post-details.js"
+      defer
+    ></script>
     <script type="module" src="./js/make-a-post.js" defer></script>
 
     <title>Index</title>
   </head>
-  <body class="bg-blue-900">
+  <body class="bg-blue-400">
     <header>
-      <div id="navBar" class="w-3/5" style="margin-bottom: 4rem"></div> 
+      <div id="navBar" class="w-3/5" style="margin-bottom: 4rem"></div>
     </header>
-    <br>
-    <div class="bg-blue-900 mt-3">
+    <br />
+    <div class="bg-blue-400 mt-3">
       <div class="flex">
         <div class="w-1/5 text-white h-12 pl-32 py-4">
           <!--left menu-->
         </div>
         <div class="w-3/5 border border-gray-600 h-auto border-t-0">
           <!--middle wall-->
-          <div class="flex">
+          <div class="flex bg-blue-500">
             <div class="flex-1 m-2">
               <h2 class="px-4 py-2 text-xl font-semibold text-white">Home</h2>
             </div>
-            <div class="flex-1 px-4 py-2 m-2">
-             
-            </div>
+            <div class="flex-1 px-4 py-2 m-2"></div>
           </div>
           <hr class="border-gray-600" />
           <!--middle creat tweet-->
           <div class="flex">
-            <div class="m-2 w-10 py-1">
-              
-            </div>
+            <div class="m-2 w-10 py-1"></div>
             <div class="flex-1 px-2 pt-2 mt-2">
               <form id="postForm" action="">
                 <textarea
                   id="titleField"
-                  class="bg-transparent text-gray-400 font-medium text-lg w-full"
+                  class="bg-transparent text-white font-medium text-lg w-full border-2"
                   rows="1"
                   cols="50"
                   placeholder="Title goes here"
@@ -53,7 +57,7 @@
                 </p>
                 <textarea
                   id="textField"
-                  class="bg-transparent text-gray-400 font-medium text-lg w-full"
+                  class="bg-transparent text-gray-50 font-medium text-lg w-full"
                   rows="2"
                   cols="50"
                   placeholder="Random thought goes here"
@@ -74,14 +78,15 @@
               </form>
             </div>
           </div>
-          
+
           <!--middle creat tweet below icons-->
           <hr class="border-blue-800 border-4" />
           <div id="errorcontainer"></div>
-          <ul><div class="px-8" id="postcontainer"></div></ul>
-          
+          <ul>
+            <div class="px-8" id="postcontainer"></div>
+          </ul>
         </div>
-        <div class="w-1/5 h-12">
+        <div class="w-1/5 bg-blue-400">
           <!--right menu-->
           <!--third-people suggetion to follow section-->
           <div

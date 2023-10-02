@@ -7,11 +7,10 @@
     <script type="module" src="./js/main.js" defer></script>
     <script type="module" src="./js/local-storage-related.js" defer></script>
     <script type="module" src="./js/components/header.js" defer></script>
-    <!--<script type="module" src="./js/components/get-posts-in-feed.js" defer></script>-->
-    <!--<script type="module" src="./js/make-a-post.js" defer></script>-->
-    <script type="module" src="./js/get-post-by-id.js" defer></script>
+    <!--<script type="module" src="./js/get-post-by-id.js" defer></script>-->
     <script type="module" src="./js/edit-a-post.js" defer></script>
     <script type="module" src="./js/edit-a-post.js" defer></script>
+    <script type="module" src="./js/profile.js" defer></script>
     <title>Profile</title>
   </head>
   <body class="bg-blue-900">
@@ -28,30 +27,15 @@
           <!--middle wall-->
           <div class="flex">
             <div class="flex-1 m-2">
-              <h2 class="px-4 py-2 text-xl font-semibold text-white">
+              <h2
+                id="profileHeader"
+                class="px-4 py-2 mt-4 text-xl font-semibold text-white"
+              >
                 Profile
               </h2>
             </div>
-            <div class="flex-1 px-4 py-2 m-2">
-              <a
-                href=""
-                class="text-2xl font-medium rounded-full text-white hover:bg-blue-800 hover:text-blue-300 float-right"
-              >
-                <svg
-                  class="m-2 h-6 w-6"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <g>
-                    <path
-                      d="M22.772 10.506l-5.618-2.192-2.16-6.5c-.102-.307-.39-.514-.712-.514s-.61.207-.712.513l-2.16 6.5-5.62 2.192c-.287.112-.477.39-.477.7s.19.585.478.698l5.62 2.192 2.16 6.5c.102.306.39.513.712.513s.61-.207.712-.513l2.16-6.5 5.62-2.192c.287-.112.477-.39.477-.7s-.19-.585-.478-.697zm-6.49 2.32c-.208.08-.37.25-.44.46l-1.56 4.695-1.56-4.693c-.07-.21-.23-.38-.438-.462l-4.155-1.62 4.154-1.622c.208-.08.37-.25.44-.462l1.56-4.693 1.56 4.694c.07.212.23.382.438.463l4.155 1.62-4.155 1.622zM6.663 3.812h-1.88V2.05c0-.414-.337-.75-.75-.75s-.75.336-.75.75v1.762H1.5c-.414 0-.75.336-.75.75s.336.75.75.75h1.782v1.762c0 .414.336.75.75.75s.75-.336.75-.75V5.312h1.88c.415 0 .75-.336.75-.75s-.335-.75-.75-.75zm2.535 15.622h-1.1v-1.016c0-.414-.335-.75-.75-.75s-.75.336-.75.75v1.016H5.57c-.414 0-.75.336-.75.75s.336.75.75.75H6.6v1.016c0 .414.335.75.75.75s.75-.336.75-.75v-1.016h1.098c.414 0 .75-.336.75-.75s-.336-.75-.75-.75z"
-                    ></path>
-                  </g>
-                </svg>
-              </a>
-            </div>
           </div>
-          <hr class="border-gray-600" />
+
           <!--middle creat tweet-->
           <div class="flex">
             <div id="profileBox" class="profilebox"></div>
@@ -61,22 +45,7 @@
           <!--middle creat tweet below icons-->
           <hr class="border-blue-800 border-4" />
           <h1 id="msg" class="text-red-700"></h1>
-          <div id="singlepostcontainer">
-            <ul>
-              <li class="border-white border-2 p-2 m-2">
-                hei jeg er en oppføring
-              </li>
-
-              <li class="border-white border-2 p-2 m-2 text-white inline-flex">
-                <img
-                  src="https://placehold.co/600x400/EEE/31343C"
-                  alt="profile picture"
-                  class="rounded-full h-12 w-12 mr-2"
-                />
-                <p>hei jeg er text</p>
-              </li>
-            </ul>
-          </div>
+          <div id="singlepostcontainer"></div>
         </div>
         <div class="w-1/5 h-12">
           <!--right menu-->
