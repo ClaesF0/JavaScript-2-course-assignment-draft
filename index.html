@@ -18,20 +18,20 @@
       defer
     ></script>
     <script type="module" src="./js/make-a-post.js" defer></script>
+    <script type="module" src=".js/make-a-comment.js"></script>
 
     <title>Index</title>
   </head>
   <body class="bg-blue-400">
     <header>
-      <div id="navBar" class="w-3/5" style="margin-bottom: 4rem"></div>
+      <div id="navBar" class="w-3/5" style="margin-bottom: 6rem"></div>
     </header>
-    <br />
-    <div class="bg-blue-400 mt-3">
+    <div class="">
       <div class="flex">
-        <div class="w-1/5 text-white h-12 pl-32 py-4">
+        <div class="hidden md:block w-1/5 text-white h-12 pl-32 py-4">
           <!--left menu-->
         </div>
-        <div class="w-3/5 border border-gray-600 h-auto border-t-0">
+        <div class="w-3/5 h-auto">
           <!--middle wall-->
           <div class="flex bg-blue-500">
             <div class="flex-1 m-2">
@@ -42,8 +42,7 @@
           <hr class="border-gray-600" />
           <!--middle creat tweet-->
           <div class="flex">
-            <div class="m-2 w-10 py-1"></div>
-            <div class="flex-1 px-2 pt-2 mt-2">
+            <div class="pt-2 mt-2 text-white">
               <form id="postForm" action="">
                 <textarea
                   id="titleField"
@@ -69,7 +68,7 @@
                   <div class="flex-1">
                     <button
                       id="postBtn"
-                      class="bg-blue-400 mt-2 mb-2 hover:bg-blue-600 text-white font-bold py-2 px-8 rounded-full mr-8 float-right"
+                      class="bg-white text-blue-500 my-2 hover:bg-blue-600 hover:text-white font-bold py-2 px-8 rounded-full mr-8 float-right"
                     >
                       Post
                     </button>
@@ -80,10 +79,9 @@
           </div>
 
           <!--middle creat tweet below icons-->
-          <hr class="border-blue-800 border-4" />
           <div id="errorcontainer"></div>
           <ul>
-            <div class="px-8" id="postcontainer"></div>
+            <div class="w-full" id="postcontainer"></div>
           </ul>
         </div>
         <div class="w-1/5 bg-blue-400">
