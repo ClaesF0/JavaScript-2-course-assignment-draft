@@ -1,60 +1,73 @@
+//import { on } from "npm/lib/npm";
 import { BASE_URL_FOR_API } from "../js/api-related";
 import { getToken } from "../js/local-storage-related";
 
-const postId = window.location.search.split("=")[1];
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("make a comment");
+  //getAllPosts();
+  const postId = window.location.search.split("=")[1];
+  const COMMENT_ON_ENTRY_URL =
+    BASE_URL_FOR_API + `api/v1/social/posts/${postId}/comment`;
+  const commentForm = document.getElementById("commentForm?" + postId);
+  const commentField = document.getElementById("commentField?" + postId);
+  const commentBtn = document.getElementById("commentBtn?" + postId);
+  const commentErrorMsg = document.getElementById("commentErrorMsg");
+  const bearerKey = getToken();
+  console.log("postId window.location.search.split(''='')[1]", postId);
+  console.log("commentForm", commentForm);
+  console.log("commentField", commentField);
+  console.log("commentBtn", commentBtn);
+  console.log("commentErrorMsg", commentErrorMsg);
+  console.log("bearerKey", bearerKey);
 
-const COMMENT_ON_ENTRY_URL =
-  BASE_URL_FOR_API + `api/v1/social/posts/${postId}/comment`;
+  console.log("COMMENT_ON_ENTRY_URL:", COMMENT_ON_ENTRY_URL);
 
-const commentField = document.getElementById("commentField");
-const commentBtn = document.getElementById("commentBtn");
-const commentErrorMsg = document.getElementById("commentErrorMsg");
-const commentForm = document.getElementById("commentForm");
+  commentBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
+    onCommentBtnClick();
+    console.log("commentBtn.addEventListener");
 
-commentForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+    const commentText = commentField.value.trim();
+    console.log("Headers:", {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${bearerKey}`,
+    });
+    console.log("Request Body:", JSON.stringify({ comment: commentText }));
+    if (commentText.length > 0) {
+      commentErrorMsg.classList.add("hidden");
 
-  let approvedCommentField = false;
-
-  if (commentField.value.trim().length > 0) {
-    commentErrorMsg.classList.add("hidden");
-    approvedCommentField = true;
-  } else {
-    commentErrorMsg.classList.remove("hidden");
-  }
-
-  if (approvedCommentField) {
-    const commentObject = {
-      comment: commentField.value,
-    };
-
-    const bearerKey = getToken();
-
-    (async function makeComment() {
       try {
+        console.log("postId window.location.search.split(''='')[1]", postId);
+        const COMMENT_ON_ENTRY_URL =
+          BASE_URL_FOR_API + `api/v1/social/posts/${postId}/comment`;
+
         const response = await fetch(COMMENT_ON_ENTRY_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${bearerKey}`,
           },
-          body: JSON.stringify(commentObject),
+          body: JSON.stringify({ comment: commentText }),
         });
 
         if (response.ok) {
           const responseData = await response.json();
-          window.location.reload(); // You might want to update the comments dynamically instead of reloading the page
-          commentForm.reset();
+          console.log("Comment added successfully:", responseData);
+
+          // Optionally, you can update the UI here
         } else {
           const errorFromServer = await response.json();
-          const errorMessage = "Something went wrong.";
-          throw new Error(errorMessage);
+          console.error("Error from server:", errorFromServer);
+          console.error("Error Response:", response);
+          const err = await response.json();
+          console.error(err);
+          return;
         }
       } catch (error) {
-        console.log("Error from server when adding a new comment:", error);
+        console.error("Error when adding a new comment:", error);
       }
-    })();
-  } else {
-    window.alert("There was an error. Please check your comment.");
-  }
+    } else {
+      commentErrorMsg.classList.remove("hidden");
+    }
+  });
 });

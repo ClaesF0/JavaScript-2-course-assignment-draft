@@ -18,9 +18,9 @@
       defer
     ></script>
     <script type="module" src="./js/make-a-post.js" defer></script>
-    <script type="module" src=".js/make-a-comment.js"></script>
+    <script type="module" src="./js/make-a-comment.js" defer></script>
 
-    <title>Index</title>
+    <title>Newsfeed</title>
   </head>
   <body class="bg-blue-400">
     <header>
@@ -43,7 +43,7 @@
           <!--middle creat tweet-->
           <div class="flex">
             <div class="pt-2 mt-2 text-white">
-              <form id="postForm" action="">
+              <form id="postForm" action="" class="mt-2">
                 <textarea
                   id="titleField"
                   class="bg-transparent text-white font-medium text-lg w-full border-2"
@@ -84,7 +84,7 @@
             <div class="w-full" id="postcontainer"></div>
           </ul>
         </div>
-        <div class="w-1/5 bg-blue-400">
+        <div class="hidden md:w-1/5 bg-blue-400">
           <!--right menu-->
           <!--third-people suggetion to follow section-->
           <div
